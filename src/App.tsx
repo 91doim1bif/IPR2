@@ -5,11 +5,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import * as AuthService from "./services/auth.service";
-import IUser from './types/user.type';
+import IUser from "./types/user.type";
 
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Home from "./components/Home";
+import Home from "./components/Home/Home";
 import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
