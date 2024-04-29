@@ -2,6 +2,11 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Start Backend Server
+
+Open a second Terminal and navigate to "./mern/server" folder.
+Run: "node index.js" to start the server.
+
 ## Available Scripts
 
 In the project directory, you can run:
