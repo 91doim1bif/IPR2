@@ -13,8 +13,8 @@ import Register from "./components/Register";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
 
-//Debug
-import Users from "./DebugForDatabase/Users"
+//Debug Components
+import Users from "./components/debugForDatabase/Users"
 
 import EventBus from "./common/EventBus";
 import { MongoClient } from 'mongodb'
@@ -52,7 +52,7 @@ const App: React.FC = () => {
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link to={"/"} className="navbar-brand">
-          NetRollMovies
+          Netflix 2.0
         </Link>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">

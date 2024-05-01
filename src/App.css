@@ -30,3 +30,40 @@ label {
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
+
+.video-container {
+  /*position: fixed;*/
+  top: 56px; /* Adjust this value to match the height of your navigation bar */
+  left: 0;
+  width: 100%;
+  height: calc(100% - 56px); /* Adjust this value to fill the remaining space below the navigation bar */
+  overflow: hidden;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  /*animation: moveRight 30s linear infinite; /* Adjust the duration and animation as needed */ 
+}
+
+.bottom-text {
+  position: absolute;
+  bottom: -400px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: auto;
+  max-width: auto; /* Adjust this value as needed */
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  z-index: 1; /* Ensure the text is above the video */
+}
