@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import './MoviePoster.scss';
 
 interface Movie {
   id: number;
@@ -6,7 +7,11 @@ interface Movie {
 }
 
 function MoviePoster(movie: Movie) {
-  return <img src={movie.image} alt={movie.id.toString()} />;
+  return (
+    <div className="movie-poster">
+      <img src={movie.image} alt="test" />
+    </div>
+  );
 }
 
 export default MoviePoster;

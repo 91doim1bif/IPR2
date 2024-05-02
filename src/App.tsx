@@ -113,7 +113,7 @@ const App: React.FC = () => {
         )}
       </nav>
 
-      <div className="container mt-3">
+      <div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
