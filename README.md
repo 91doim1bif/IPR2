@@ -21,6 +21,15 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ### `npm run build`
 
+| Sprache        | Erscheinungsjahr | Entwickler      | Paradigma       |
+| -------------- | ---------------- | --------------- | --------------- |
+| Python         | 1991             | Guido van Rossum| Multiparadigma  |
+| JavaScript     | 1995             | Brendan Eich    | Multiparadigma  |
+| Java           | 1995             | Sun Microsystems| Objektorientiert|
+| C++            | 1985             | Bjarne Stroustrup| Multiparadigma  |
+| Ruby           | 1995             | Yukihiro Matsumoto| Objektorientiert|
+| Swift          | 2014             | Apple Inc.      | Multiparadigma  |
+
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
