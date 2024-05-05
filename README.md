@@ -1,8 +1,88 @@
-# Getting Started with Create React App
+```markdown
+# Backend-API für MongoDB-Datenbank
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Dies ist eine einfache Node.js-Express-Anwendung, die als Backend-API für eine MongoDB-Datenbank dient. Sie enthält Endpunkte zum Abrufen von Daten aus verschiedenen Sammlungen der MongoDB-Datenbank.
 
-## Available Scripts
+## Setup
+
+1. Stellen Sie sicher, dass Node.js und npm auf Ihrem System installiert sind.
+
+2. Klonen Sie dieses Repository auf Ihren lokalen Computer.
+
+3. Öffnen Sie das Terminal im Verzeichnis des geklonten Repositories und führen Sie den folgenden Befehl aus, um die Abhängigkeiten zu installieren:
+
+    ```bash
+    npm install
+    ```
+
+4. Erstellen Sie eine MongoDB-Datenbank und stellen Sie die Verbindungs-URI in der Datei `backend/index.js` ein.
+
+5. Starten Sie den Server mit dem folgenden Befehl:
+
+    ```bash
+    npm start
+    ```
+
+## Verwendung
+
+### 1. Abrufen aller Elemente aus einer Sammlung
+
+Um alle Elemente aus einer bestimmten Sammlung abzurufen, senden Sie eine GET-Anfrage an den Endpunkt `/api/elements/:collectionName`.
+
+Beispiel:
+
+```http
+GET /api/elements/movies
+```
+
+### 2. Abrufen aller Schlüssel für eine bestimmte Sammlung
+
+Um alle Schlüssel (Feldnamen) für eine bestimmte Sammlung abzurufen, senden Sie eine GET-Anfrage an den Endpunkt `/api/keys/:collectionName`.
+
+Beispiel:
+
+```http
+GET /api/keys/movies
+```
+
+### 3. Abrufen aller Tabellendaten für eine bestimmte Sammlung mit Paginierung
+
+Um alle Tabellendaten für eine bestimmte Sammlung mit Paginierung abzurufen, senden Sie eine GET-Anfrage an den Endpunkt `/api/tables/:collectionName`.
+
+Beispiel:
+
+```http
+GET /api/tables/movies?page=1&limit=10
+```
+
+### 4. Abrufen aller Sammlungen
+
+Um alle Sammlungen in der MongoDB-Datenbank abzurufen, senden Sie eine GET-Anfrage an den Endpunkt `/api/collections`.
+
+Beispiel:
+
+```http
+GET /api/collections
+```
+
+### 5. Abrufen aller Dokumente aus einer bestimmten Sammlung
+
+Um alle Dokumente aus einer bestimmten Sammlung abzurufen, senden Sie eine GET-Anfrage an den Endpunkt `/api/table/:collectionName`.
+
+Beispiel:
+
+```http
+GET /api/table/movies
+```
+
+## Port
+
+Standardmäßig wird der Server auf Port 5000 gestartet. Sie können den Port in der Datei `backend/index.js` ändern.
+
+```
+
+Diese README-Datei erklärt die Schritte zum Einrichten der Backend-Anwendung, sowie die Verwendung der verschiedenen Endpunkte für den Zugriff auf die MongoDB-Datenbank.
+
 
 In the project directory, you can run:
 
