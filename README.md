@@ -1,4 +1,4 @@
-<iframe width="560" height="315" src="[https://www.youtube.com/embed/VIDEO_ID](https://www.youtube.com/watch?v=mqUN4N2q4qY)" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=mqUN4N2q4qY" frameborder="0" allowfullscreen></iframe>
 
 <details>
   <summary>Klicke hier, um mehr zu erfahren</summary>
