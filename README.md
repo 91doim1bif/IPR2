@@ -59,7 +59,6 @@ User
 | accounts        | Array von Accounts | Liste der Benutzerkonten                    |
 
 
-```markdown
 # Backend-API für MongoDB-Datenbank
 
 Dies ist eine einfache Node.js-Express-Anwendung, die als Backend-API für eine MongoDB-Datenbank dient. Sie enthält Endpunkte zum Abrufen von Daten aus verschiedenen Sammlungen der MongoDB-Datenbank.
