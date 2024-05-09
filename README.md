@@ -1,52 +1,45 @@
-Account
-Feld	Typ	Beschreibung
-_id	String	Eindeutige Kennung des Kontos
-userId	ObjectId (Referenz)	Die ID des Benutzers, dem das Konto gehört
-type	String	Art des Kontos (z.B. 'Facebook', 'Google')
-provider	String	Anbieter des Kontos (z.B. 'OAuth2')
-providerAccountId	String	Eindeutige Kennung des Kontos beim Anbieter
-refresh_token	String	Aktualisierungstoken für das Konto
-access_token	String	Zugriffstoken für das Konto
-expires_at	Number	Ablaufdatum des Tokens
-token_type	String	Typ des Tokens (z.B. 'Bearer')
-scope	String	Bereich des Zugriffs
-id_token	String	Token zur Identifizierung
-session_state	String	Zustand der Sitzung
-Session
-Feld	Typ	Beschreibung
-_id	String	Eindeutige Kennung der Sitzung
-sessionToken	String	Token zur Identifizierung der Sitzung
-userId	ObjectId (Referenz)	Die ID des Benutzers, dem die Sitzung gehört
-expires	Date	Ablaufdatum der Sitzung
-VerificationToken
-Feld	Typ	Beschreibung
-_id	String	Eindeutige Kennung des Verifizierungstokens
-identifier	String	Bezeichner für die Verifizierung
-token	String	Token zur Verifizierung
-expires	Date	Ablaufdatum des Tokens
-Movie
-Feld	Typ	Beschreibung
-_id	String	Eindeutige Kennung des Films
-title	String	Titel des Films
-description	String	Beschreibung des Films
-videoUrl	String	URL zum Video des Films
-thumbnailUrl	String	URL zum Thumbnail-Bild des Films
-genre	String	Genre des Films
-duration	String	Dauer des Films (z.B. '2 Stunden 30 Minuten')
-User
-Feld	Typ	Beschreibung
-_id	String	Eindeutige Kennung des Benutzers
-name	String	Name des Benutzers
-image	String	URL zum Profilbild des Benutzers
-email	String	E-Mail-Adresse des Benutzers
-emailVerified	Date	Datum der E-Mail-Verifizierung
-password	String	Passwort des Benutzers
-createdAt	Date	Erstellungsdatum des Benutzerkontos
-updatedAt	Date	Datum der letzten Aktualisierung
-favoriteIds	Array von ObjectId	IDs der favorisierten Konten
-sessions	Array von Sessions	Liste der Benutzersitzungen
-verificationTokens	Array von Verifizierungstokens	Liste der Verifizierungstokens
-accounts	Array von Accounts	Liste der Benutzerkonten
+| Modell              | Feld            | Typ                | Beschreibung                                |
+|---------------------|-----------------|--------------------|---------------------------------------------|
+| Account             | _id             | String             | Eindeutige Kennung des Kontos               |
+|                     | userId          | ObjectId (Referenz)| Die ID des Benutzers, dem das Konto gehört  |
+|                     | type            | String             | Art des Kontos (z.B. 'Facebook', 'Google') |
+|                     | provider        | String             | Anbieter des Kontos (z.B. 'OAuth2')        |
+|                     | providerAccountId | String           | Eindeutige Kennung des Kontos beim Anbieter|
+|                     | refresh_token   | String             | Aktualisierungstoken für das Konto          |
+|                     | access_token    | String             | Zugriffstoken für das Konto                 |
+|                     | expires_at      | Number             | Ablaufdatum des Tokens                      |
+|                     | token_type      | String             | Typ des Tokens (z.B. 'Bearer')             |
+|                     | scope           | String             | Bereich des Zugriffs                        |
+|                     | id_token        | String             | Token zur Identifizierung                    |
+|                     | session_state   | String             | Zustand der Sitzung                         |
+| Session             | _id             | String             | Eindeutige Kennung der Sitzung              |
+|                     | sessionToken    | String             | Token zur Identifizierung der Sitzung       |
+|                     | userId          | ObjectId (Referenz)| Die ID des Benutzers, dem die Sitzung gehört|
+|                     | expires         | Date               | Ablaufdatum der Sitzung                     |
+| VerificationToken   | _id             | String             | Eindeutige Kennung des Verifizierungstokens |
+|                     | identifier      | String             | Bezeichner für die Verifizierung            |
+|                     | token           | String             | Token zur Verifizierung                      |
+|                     | expires         | Date               | Ablaufdatum des Tokens                      |
+| Movie               | _id             | String             | Eindeutige Kennung des Films                |
+|                     | title           | String             | Titel des Films                             |
+|                     | description     | String             | Beschreibung des Films                      |
+|                     | videoUrl        | String             | URL zum Video des Films                     |
+|                     | thumbnailUrl    | String             | URL zum Thumbnail-Bild des Films            |
+|                     | genre           | String             | Genre des Films                             |
+|                     | duration        | String             | Dauer des Films (z.B. '2 Stunden 30 Minuten')|
+| User                | _id             | String             | Eindeutige Kennung des Benutzers            |
+|                     | name            | String             | Name des Benutzers                          |
+|                     | image           | String             | URL zum Profilbild des Benutzers            |
+|                     | email           | String             | E-Mail-Adresse des Benutzers                |
+|                     | emailVerified   | Date               | Datum der E-Mail-Verifizierung              |
+|                     | password        | String             | Passwort des Benutzers                      |
+|                     | createdAt       | Date               | Erstellungsdatum des Benutzerkontos         |
+|                     | updatedAt       | Date               | Datum der letzten Aktualisierung            |
+|                     | favoriteIds     | Array von ObjectId | IDs der favorisierten Konten                |
+|                     | sessions        | Array von Sessions | Liste der Benutzersitzungen                 |
+|                     | verificationTokens | Array von Verifizierungstokens | Liste der Verifizierungstokens          |
+|                     | accounts        | Array von Accounts | Liste der Benutzerkonten                    |
+
 
 ```markdown
 # Backend-API für MongoDB-Datenbank
