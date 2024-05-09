@@ -1,4 +1,4 @@
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=mqUN4N2q4qY" frameborder="0" allowfullscreen></iframe>
+[![Watch the video](https://i.stack.imgur.com/Vp2cE.png)](https://www.youtube.com/watch?v=mqUN4N2q4qY)
 
 <details>
   <summary>Klicke hier, um mehr zu erfahren</summary>
