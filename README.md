@@ -1,4 +1,4 @@
-[![Watch the video](https://www.youtube.com/watch?v=mqUN4N2q4qY)
+https://www.youtube.com/watch?v=mqUN4N2q4qY
 
 <details>
   <summary>Klicke hier, um mehr zu erfahren</summary>
