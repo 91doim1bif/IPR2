@@ -1,5 +1,5 @@
 
-Account
+## Account
 | Feld            | Typ                | Beschreibung                                |
 |-----------------|--------------------|---------------------------------------------|
 | _id             | String             | Eindeutige Kennung des Kontos               |
@@ -15,7 +15,7 @@ Account
 | id_token        | String             | Token zur Identifizierung                    |
 | session_state   | String             | Zustand der Sitzung                         |
 
-Session
+## Session
 | Feld            | Typ                | Beschreibung                                |
 |-----------------|--------------------|---------------------------------------------|
 | _id             | String             | Eindeutige Kennung der Sitzung              |
@@ -23,7 +23,7 @@ Session
 | userId          | ObjectId (Referenz)| Die ID des Benutzers, dem die Sitzung gehört|
 | expires         | Date               | Ablaufdatum der Sitzung                     |
 
-VerificationToken
+## VerificationToken
 | Feld            | Typ                | Beschreibung                                |
 |-----------------|--------------------|---------------------------------------------|
 | _id             | String             | Eindeutige Kennung des Verifizierungstokens |
@@ -31,7 +31,7 @@ VerificationToken
 | token           | String             | Token zur Verifizierung                      |
 | expires         | Date               | Ablaufdatum des Tokens                      |
 
-Movie
+## Movie
 | Feld            | Typ                | Beschreibung                                |
 |-----------------|--------------------|---------------------------------------------|
 | _id             | String             | Eindeutige Kennung des Films                |
