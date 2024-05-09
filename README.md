@@ -1,4 +1,9 @@
+<details>
+  <summary>Klicke hier, um mehr zu erfahren</summary>
 
+Hier kannst du zusätzliche Informationen oder Details über dein Projekt einfügen.
+
+</details>
 ## Account
 | Feld            | Typ                | Beschreibung                                |
 |-----------------|--------------------|---------------------------------------------|
