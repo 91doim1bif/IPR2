@@ -3,13 +3,11 @@ Wir werden uns auf dieses Tutorial konzentrieren:
 https://www.youtube.com/watch?v=mqUN4N2q4qY
 
 <details>
-  <summary>## Klicke hier, um mehr zu erfahren</summary>
+  <summary>Diese Modelle wurden gezeigt</summary>
 
 Hier kannst du zusätzliche Informationen oder Details über dein Projekt einfügen.
 
-</details>
-
-## Account
+### Account
 | Feld            | Typ                | Beschreibung                                |
 |-----------------|--------------------|---------------------------------------------|
 | _id             | String             | Eindeutige Kennung des Kontos               |
@@ -25,7 +23,7 @@ Hier kannst du zusätzliche Informationen oder Details über dein Projekt einfü
 | id_token        | String             | Token zur Identifizierung                    |
 | session_state   | String             | Zustand der Sitzung                         |
 
-## Session
+### Session
 | Feld            | Typ                | Beschreibung                                |
 |-----------------|--------------------|---------------------------------------------|
 | _id             | String             | Eindeutige Kennung der Sitzung              |
@@ -33,7 +31,7 @@ Hier kannst du zusätzliche Informationen oder Details über dein Projekt einfü
 | userId          | ObjectId (Referenz)| Die ID des Benutzers, dem die Sitzung gehört|
 | expires         | Date               | Ablaufdatum der Sitzung                     |
 
-## VerificationToken
+### VerificationToken
 | Feld            | Typ                | Beschreibung                                |
 |-----------------|--------------------|---------------------------------------------|
 | _id             | String             | Eindeutige Kennung des Verifizierungstokens |
@@ -41,7 +39,7 @@ Hier kannst du zusätzliche Informationen oder Details über dein Projekt einfü
 | token           | String             | Token zur Verifizierung                      |
 | expires         | Date               | Ablaufdatum des Tokens                      |
 
-## Movie
+### Movie
 | Feld            | Typ                | Beschreibung                                |
 |-----------------|--------------------|---------------------------------------------|
 | _id             | String             | Eindeutige Kennung des Films                |
@@ -52,7 +50,7 @@ Hier kannst du zusätzliche Informationen oder Details über dein Projekt einfü
 | genre           | String             | Genre des Films                             |
 | duration        | String             | Dauer des Films (z.B. '2 Stunden 30 Minuten')|
 
-User
+### User
 | Feld            | Typ                | Beschreibung                                |
 |-----------------|--------------------|---------------------------------------------|
 | _id             | String             | Eindeutige Kennung des Benutzers            |
@@ -68,6 +66,7 @@ User
 | verificationTokens | Array von Verifizierungstokens | Liste der Verifizierungstokens          |
 | accounts        | Array von Accounts | Liste der Benutzerkonten                    |
 
+</details>
 
 # Backend-API für MongoDB-Datenbank
 
@@ -95,56 +94,17 @@ Dies ist eine einfache Node.js-Express-Anwendung, die als Backend-API für eine 
 
 ## Verwendung
 
-### 1. Abrufen aller Elemente aus einer Sammlung
+### API-Routen
 
-Um alle Elemente aus einer bestimmten Sammlung abzurufen, senden Sie eine GET-Anfrage an den Endpunkt `/api/elements/:collectionName`.
+| Pfad                             | Methode | Beschreibung                                |
+|----------------------------------|---------|--------------------------------------------|
+| `/api/signup`                    | POST    | Benutzeranmeldung                           |
+| `/api/signin`                    | POST    | Benutzeranmeldung                           |
+| `/api/collections`               | GET     | Liste aller Sammlungen                     |
+| `/api/keys/:collectionName`      | GET     | Schlüssel für eine Sammlung                |
+| `/api/table/:collectionName`     | GET     | Tabelle für eine Sammlung                  |
+| `/api/tables/:collectionName`    | GET     | Liste aller Tabellen einer Sammlung        |
+| `/api/add-element/:collectionName` | POST  | Neues Element zu einer Sammlung hinzufügen |
+| `/api/delete-element/:collectionName/:elementId` | DELETE | Element aus einer Sammlung löschen    |
+| `/api/update-element/:collectionName/:elementId` | PUT | Element aus einer Sammlung updaten    |
 
-Beispiel:
-
-```http
-GET /api/elements/movies
-```
-
-### 2. Abrufen aller Schlüssel für eine bestimmte Sammlung
-
-Um alle Schlüssel (Feldnamen) für eine bestimmte Sammlung abzurufen, senden Sie eine GET-Anfrage an den Endpunkt `/api/keys/:collectionName`.
-
-Beispiel:
-
-```http
-GET /api/keys/movies
-```
-
-### 3. Abrufen aller Tabellendaten für eine bestimmte Sammlung mit Paginierung
-
-Um alle Tabellendaten für eine bestimmte Sammlung mit Paginierung abzurufen, senden Sie eine GET-Anfrage an den Endpunkt `/api/tables/:collectionName`.
-
-Beispiel:
-
-```http
-GET /api/tables/movies?page=1&limit=10
-```
-
-### 4. Abrufen aller Sammlungen
-
-Um alle Sammlungen in der MongoDB-Datenbank abzurufen, senden Sie eine GET-Anfrage an den Endpunkt `/api/collections`.
-
-Beispiel:
-
-```http
-GET /api/collections
-```
-
-### 5. Abrufen aller Dokumente aus einer bestimmten Sammlung
-
-Um alle Dokumente aus einer bestimmten Sammlung abzurufen, senden Sie eine GET-Anfrage an den Endpunkt `/api/table/:collectionName`.
-
-Beispiel:
-
-```http
-GET /api/table/movies
-```
-
-## Port
-
-Standardmäßig wird der Server auf Port 5000 gestartet. Sie können den Port in der Datei `backend/index.js` ändern.
