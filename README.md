@@ -1,7 +1,9 @@
+Wir werden uns auf dieses Tutorial konzentrieren:
+
 https://www.youtube.com/watch?v=mqUN4N2q4qY
 
 <details>
-  <summary>Klicke hier, um mehr zu erfahren</summary>
+  <summary>## Klicke hier, um mehr zu erfahren</summary>
 
 Hier kannst du zusätzliche Informationen oder Details über dein Projekt einfügen.
 
