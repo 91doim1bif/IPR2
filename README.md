@@ -4,6 +4,7 @@
 Hier kannst du zusätzliche Informationen oder Details über dein Projekt einfügen.
 
 </details>
+
 ## Account
 | Feld            | Typ                | Beschreibung                                |
 |-----------------|--------------------|---------------------------------------------|
