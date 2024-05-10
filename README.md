@@ -84,7 +84,7 @@ Dies ist eine einfache Node.js-Express-Anwendung, die als Backend-API für eine 
     npm install
     ```
 
-4. Erstellen Sie eine MongoDB-Datenbank und stellen Sie die Verbindungs-URI in der Datei `backend/index.js` ein.
+4. Führen Sie in einem separaten Befehlsfenster im Ordner "/mern/server/" den Befehl node server.js aus.
 
 5. Starten Sie den Server mit dem folgenden Befehl:
 
