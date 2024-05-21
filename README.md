@@ -100,6 +100,10 @@ Passwort: user
 | `/api/profiles`                                  | POST    | Neues Profil hinzufügen                    |
 | `/api/profiles/:profileId`                       | DELETE  | Profil löschen                             |
 
+## CI/CD Pipeline
+codecov
+cypress
+
 ## Beispiel-Filme
 
 Die folgenden Filme wurden in die Datenbank hinzugefügt:
