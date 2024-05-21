@@ -79,7 +79,7 @@ Passwort: admin
 ### User
 
 Email: user@net-movies.de
-Passowrt: user
+Passwort: user
 
 ## Verwendung
 
@@ -142,11 +142,3 @@ Die folgenden Filme wurden in die Datenbank hinzugefügt:
 - **Thumbnail URL**: [Elephants Dream Thumbnail](https://upload.wikimedia.org/wikipedia/commons/f/fd/Elephants_Dream_Emo_Proog_s6.jpg)
 - **Genre**: Animation
 - **Duration**: 10:53
-
-## Beitragende
-
-Beiträge sind willkommen! Bitte öffnen Sie ein Issue oder reichen Sie einen Pull-Request ein.
-
-## Lizenz
-
-Dieses Projekt ist unter der MIT-Lizenz lizenziert.
