@@ -1,138 +1,87 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import Profiles from "./components/Profiles/Profiles";
+import Auth from "./components/Authentifcation/Auth";
+import Home from "./components/Home/Home";
+import {
+  AuthProvider,
+  useAuth,
+} from "./components/Authentifcation/AuthProvider";
+import Navbar from "./components/Navbar/Navbar";
+import { useLocation } from "react-router-dom";
+import ManageProfiles from "./components/Profiles/ManageProfiles";
+import Watch from "./components/Home/Watch";
+import MovieListPage from "./components/Home/MovieListPage";
 
-import * as AuthService from "./services/auth.service";
-import IUser from './types/user.type';
-
-import Test from "./components/Test";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Home from "./components/Home";
-import Profile from "./components/Profile";
-
-//Debug
-import Users from "./DebugForDatabase/Users"
-
-import EventBus from "./common/EventBus";
-import { MongoClient } from 'mongodb'
-
+const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const { user, loading } = useAuth();
+  if (loading) return <div>Loading...</div>;
+  return user ? <>{children}</> : <Navigate to="/auth" />;
+};
 
 const App: React.FC = () => {
-  const [showModeratorBoard, setShowModeratorBoard] = useState<boolean>(false);
-  const [showAdminBoard, setShowAdminBoard] = useState<boolean>(false);
-  const [currentUser, setCurrentUser] = useState<IUser | undefined>(undefined);
+  const location = useLocation();
 
-  useEffect(() => {
-    const user = AuthService.getCurrentUser();
-
-    if (user) {
-      setCurrentUser(user);
-      //setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-      //setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
-    }
-
-    EventBus.on("logout", logOut);
-
-    return () => {
-      EventBus.remove("logout", logOut);
-    };
-  }, []);
-
-  const logOut = () => {
-    AuthService.logout();
-    setShowModeratorBoard(false);
-    setShowAdminBoard(false);
-    setCurrentUser(undefined);
-  };
+  // List of paths where the Navbar should not be displayed
+  const authPaths = ["/auth", "/login", "/register"];
 
   return (
-    <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <Link to={"/"} className="navbar-brand">
-          NetRollMovies
-        </Link>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/home"} className="nav-link">
-              Home
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link to={"/users"} className="nav-link">
-              Users
-            </Link>
-          </li>
-
-          {showModeratorBoard && (
-            <li className="nav-item">
-              <Link to={"/mod"} className="nav-link">
-                Moderator Board
-              </Link>
-            </li>
-          )}
-
-          {showAdminBoard && (
-            <li className="nav-item">
-              <Link to={"/admin"} className="nav-link">
-                Admin Board
-              </Link>
-            </li>
-          )}
-
-          {currentUser && (
-            <li className="nav-item">
-              <Link to={"/profile"} className="nav-link">
-                Profile
-              </Link>
-            </li>
-          )}
-        </div>
-
-        {currentUser ? (
-          <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link to={"/profile"} className="nav-link">
-                {currentUser.name}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <a href="/login" className="nav-link" onClick={logOut}>
-                LogOut
-              </a>
-            </li>
-          </div>
-        ) : (
-          <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link to={"/login"} className="nav-link">
-                Login
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link to={"/register"} className="nav-link">
-                Sign Up
-              </Link>
-            </li>
-          </div>
-        )}
-      </nav>
-
-      <div className="container mt-3">
+    <AuthProvider>
+      <div className="App">
+        {authPaths.includes(location.pathname) ? null : null}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/users" element={<Users/>} />
+          <Route path="/" element={<Navigate to="/auth" />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route
+            path="/profiles"
+            element={
+              <PrivateRoute>
+                <Profiles />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/manage"
+            element={
+              <PrivateRoute>
+                <ManageProfiles />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/watch/:movieId"
+            element={
+              <PrivateRoute>
+                <Watch />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/home"
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/movieListPage"
+            element={
+              <PrivateRoute>
+                <MovieListPage />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </div>
-    </div>
+    </AuthProvider>
   );
 };
 

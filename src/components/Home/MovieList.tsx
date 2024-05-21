@@ -1,0 +1,52 @@
+import React, { useState } from "react";
+import { isEmpty } from "lodash";
+import MovieCard from "./MovieCard";
+import InfoModal from "./InfoModal"; // Passe den Pfad an deine Projektstruktur an
+import { Movie } from "../../types/movie"; // Passe den Importpfad an deine Projektstruktur an
+
+interface MovieListProps {
+  data: Movie[];
+  title: string;
+}
+
+const MovieList: React.FC<MovieListProps> = ({ data, title }) => {
+  const [selectedMovieId, setSelectedMovieId] = useState<string | null>(null);
+
+  if (isEmpty(data)) {
+    return (
+      <div className="px-4 md:px-12 mt-4 space-y-8">
+        <p className="text-white text-md md:text-xl lg:text-2xl font-semibold">
+          {title}
+        </p>
+        <p className="text-white">No movies found</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="px-4 md:px-12 mt-4 space-y-8">
+      <p className="text-white text-md md:text-xl lg:text-2xl font-semibold">
+        {title}
+      </p>
+      <div className="grid grid-cols-4 gap-2">
+        {data.map((movie) => (
+          <MovieCard
+            key={movie.id}
+            data={movie}
+            onInfoClick={setSelectedMovieId}
+          />
+        ))}
+      </div>
+      {selectedMovieId && (
+        <InfoModal
+          visible={!!selectedMovieId}
+          onClose={() => setSelectedMovieId(null)}
+          movieId={selectedMovieId}
+          setMovieId={setSelectedMovieId}
+        />
+      )}
+    </div>
+  );
+};
+
+export default MovieList;

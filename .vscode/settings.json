@@ -1,0 +1,16 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "CodeGPT.apiKey": "Fireworks AI",
+  "editor.formatOnSave": true,
+  "tailwindCSS.includeLanguages": {
+    "html": "html",
+    "javascript": "typescript",
+    "css": "css"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  }
+}

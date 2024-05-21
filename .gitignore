@@ -2,8 +2,10 @@
 
 # dependencies
 /node_modules
+/mern/server/node_modules
 /.pnp
 .pnp.js
+public/videos/test.mp4
 
 # testing
 /coverage
