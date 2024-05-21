@@ -11,7 +11,7 @@ Wir werden uns auf dieses Tutorial konzentrieren:
 <details>
   <summary>Diese Modelle wurden gezeigt</summary>
 
-Hier kannst du zusätzliche Informationen oder Details über dein Projekt einfügen.
+(Die Modelle können noch angepasst werden)
 
 ### Account
 
