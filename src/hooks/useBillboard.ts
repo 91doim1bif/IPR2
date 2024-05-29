@@ -21,7 +21,7 @@ const useBillboard = () => {
       try {
         setIsLoading(true);
         const response = await axios.get<BillboardData>(
-          "http://localhost:5000/api/billboard"
+          "http://localhost:3080/api/billboard"
         );
         setData(response.data);
       } catch (error) {

@@ -39,7 +39,7 @@ passport.use(
     {
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:5000/auth/google/callback",
+      callbackURL: "http://localhost:3080/auth/google/callback",
     },
     async (token, tokenSecret, profile, done) => {
       let user = await User.findOne({ googleId: profile.id });
@@ -61,7 +61,7 @@ passport.use(
     {
       clientID: GITHUB_CLIENT_ID,
       clientSecret: GITHUB_CLIENT_SECRET,
-      callbackURL: "http://localhost:5000/auth/github/ccallback",
+      callbackURL: "http://localhost:3080/auth/github/ccallback",
     },
     async (accessToken, refreshToken, profile, done) => {
       let user = await User.findOne({ githubId: profile.id });
@@ -142,7 +142,7 @@ mongoose
   })
   .then(() => {
     console.log("MongoDB connected");
-    const PORT = process.env.PORT || 5000;
+    const PORT = process.env.PORT || 3080;
     app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
   })
   .catch((err) => {

@@ -21,7 +21,7 @@ const MovieListPage: React.FC = () => {
 
   const fetchMovies = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/movies");
+      const response = await axios.get("http://localhost:3080/api/movies");
       setMovies(response.data);
     } catch (error) {
       console.error("Failed to fetch movies", error);
@@ -38,7 +38,7 @@ const MovieListPage: React.FC = () => {
 
   const handleAddMovie = async () => {
     try {
-      await axios.post("http://localhost:5000/api/movies", newMovie);
+      await axios.post("http://localhost:3080/api/movies", newMovie);
       fetchMovies(); // Aktualisiere die Filmliste nach dem Hinzufügen
       setNewMovie({
         title: "",

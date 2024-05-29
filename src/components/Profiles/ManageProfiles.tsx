@@ -16,7 +16,7 @@ const ManageProfiles: React.FC = () => {
           return;
         }
 
-        const response = await axios.get("http://localhost:5000/api/profiles", {
+        const response = await axios.get("http://localhost:3080/api/profiles", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -33,7 +33,7 @@ const ManageProfiles: React.FC = () => {
   const deleteProfile = async (profileId: string) => {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/profiles/${profileId}`,
+        `http://localhost:3080/api/profiles/${profileId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

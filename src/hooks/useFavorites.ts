@@ -16,7 +16,7 @@ const useFavorites = (favoriteIds: string[]) => {
         setIsLoading(false);
         return;
       }
-      const response = await axios.get("http://localhost:5000/api/favorites", {
+      const response = await axios.get("http://localhost:3080/api/favorites", {
         params: { ids: favoriteIds.join(",") },
       });
       setFavorites(response.data);
