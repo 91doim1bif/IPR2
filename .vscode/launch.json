@@ -21,6 +21,13 @@
       "restart": true,
       "protocol": "inspector",
       "port": 9229 // Debugging port for Node.js
+    },
+    {
+      "type": "firefox",
+      "request": "launch",
+      "name": "Launch Firefox against localhost",
+      "url": "http://localhost:3000/auth",
+      "webRoot": "${workspaceFolder}"
     }
   ]
 }
