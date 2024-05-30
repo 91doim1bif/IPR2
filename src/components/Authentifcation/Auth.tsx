@@ -16,7 +16,7 @@ interface AuthState {
 
 const Auth: React.FC = () => {
   const navigate = useNavigate();
-  const { login, register } = useAuth();
+  const { login, register, error: credentials_error } = useAuth();
   const [authState, setAuthState] = useState<AuthState>({
     name: "",
     email: "",
@@ -115,6 +115,9 @@ const Auth: React.FC = () => {
                 type="password"
                 value={authState.password}
               />
+              <p style={{ color: "red" }} className=" rounded-md w-full mt-0">
+                {credentials_error}
+              </p>
               <button
                 onClick={handleAuthAction}
                 className="bg-red-600 py-3 text-white rounded-md w-full mt-10"
