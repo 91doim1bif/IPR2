@@ -35,7 +35,7 @@ interface AuthProviderProps {
 }
 
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL || "http://localhost:5000",
+  baseURL: process.env.REACT_APP_API_BASE_URL || "http://localhost:3080",
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -131,13 +131,13 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   const googleLogin = () => {
     window.location.href = `${
-      process.env.REACT_APP_API_BASE_URL || "http://localhost:5000"
+      process.env.REACT_APP_API_BASE_URL || "http://localhost:3080"
     }/auth/google`;
   };
 
   const githubLogin = () => {
     window.location.href = `${
-      process.env.REACT_APP_API_BASE_URL || "http://localhost:5000"
+      process.env.REACT_APP_API_BASE_URL || "http://localhost:3080"
     }/auth/github`;
   };
 

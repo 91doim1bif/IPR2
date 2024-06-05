@@ -12,16 +12,18 @@ interface AuthState {
   email: string;
   password: string;
   variant: "login" | "register";
+  credentials_error: string | null;
 }
 
 const Auth: React.FC = () => {
   const navigate = useNavigate();
-  const { login, register } = useAuth();
+  const { login, register, error: credentials_error } = useAuth();
   const [authState, setAuthState] = useState<AuthState>({
     name: "",
     email: "",
     password: "",
     variant: "login",
+    credentials_error: "",
   });
 
   const handleInputChange = (
@@ -56,6 +58,9 @@ const Auth: React.FC = () => {
   const toggleVariant = useCallback(() => {
     setAuthState((prev) => ({
       ...prev,
+      credentials_error: "",
+      email: "",
+      password: "",
       variant: prev.variant === "login" ? "register" : "login",
     }));
   }, []);
@@ -65,6 +70,7 @@ const Auth: React.FC = () => {
 
     try {
       if (variant === "login") {
+        authState.credentials_error = credentials_error;
         await login(email, password);
       } else {
         await register(name, email, password);
@@ -115,6 +121,11 @@ const Auth: React.FC = () => {
                 type="password"
                 value={authState.password}
               />
+              <p style={{ color: "red" }} className=" rounded-md w-full mt-0">
+                {authState.variant === "login"
+                  ? authState.credentials_error
+                  : null}
+              </p>
               <button
                 onClick={handleAuthAction}
                 className="bg-red-600 py-3 text-white rounded-md w-full mt-10"

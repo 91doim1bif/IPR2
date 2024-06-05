@@ -16,11 +16,18 @@
       "outFiles": ["${workspaceFolder}/**/*.js"],
       "env": {
         "NODE_ENV": "development",
-        "PORT": "5000" // Ensure the server runs on port 5000
+        "PORT": "3080" // Ensure the server runs on port 3080
       },
       "restart": true,
       "protocol": "inspector",
       "port": 9229 // Debugging port for Node.js
+    },
+    {
+      "type": "firefox",
+      "request": "launch",
+      "name": "Launch Firefox against localhost",
+      "url": "http://localhost:3000/auth",
+      "webRoot": "${workspaceFolder}"
     }
   ]
 }

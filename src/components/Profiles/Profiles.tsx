@@ -19,7 +19,7 @@ const Profiles: React.FC = () => {
           return;
         }
 
-        const response = await axios.get("http://localhost:5000/api/profiles", {
+        const response = await axios.get("http://localhost:3080/api/profiles", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -42,7 +42,7 @@ const Profiles: React.FC = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:5000/api/profiles",
+        "http://localhost:3080/api/profiles",
         { name: newProfileName, image: "images/default-blue.jpg", isChild },
         { headers: { Authorization: `Bearer ${token}` } }
       );

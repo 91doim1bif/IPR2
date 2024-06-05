@@ -22,7 +22,7 @@ const useMovie = (movieId: string | null) => {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `http://localhost:5000/api/movies/${movieId}`
+        `http://localhost:3080/api/movies/${movieId}`
       );
       setData(response.data);
     } catch (err) {

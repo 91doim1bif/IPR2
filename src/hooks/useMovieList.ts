@@ -11,7 +11,7 @@ const useMovieList = () => {
     const fetchMovies = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get("http://localhost:5000/api/movies");
+        const response = await axios.get("http://localhost:3080/api/movies");
         setData(response.data);
       } catch (error) {
         setError("Failed to fetch movies");
