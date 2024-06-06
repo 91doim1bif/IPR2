@@ -1,6 +1,6 @@
 import React from 'react';
-import { renderHook, act } from '@testing-library/react-hooks';
-import { InfoModalProvider, useInfoModal } from './useInfoModal';
+import { renderHook, act } from '@testing-library/react';
+import { InfoModalProvider, useInfoModal } from '../hooks/useInfoModal';
 
 describe('useInfoModal Hook', () => {
   test('throws error when used outside of InfoModalProvider', () => {

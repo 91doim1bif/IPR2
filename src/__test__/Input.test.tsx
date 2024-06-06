@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import Input from '../components/Authentification/Input';
+import Input from '../components/Authentifcation/Input';
 
 describe('Input component', () => {
   it('renders without crashing', () => {

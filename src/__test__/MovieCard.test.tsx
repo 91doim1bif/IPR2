@@ -1,15 +1,17 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import MovieCard from "./MovieCard";
+import MovieCard from "../components/Home/MovieCard";
 
 describe("MovieCard component", () => {
   const mockData = {
-    id: "1",
-    title: "Test Movie",
-    thumbnailUrl: "test.jpg",
-    duration: "1h 30m",
-    genre: "Action",
+    title: 'Big Buck Bunny',
+    description: 'Big Buck Bunny is a short computer-animated comedy film by the Blender Institute.',
+    videoUrl: '[Big Buck Bunny Video](http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4)',
+    thumbnailUrl: '[Big Buck Bunny Thumbnail](https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217)',
+    genre: 'Animation',
+    duration: '10:34',
+    id: '664a6a887d397d87582c27e0'
   };
 
   test("renders movie card correctly", () => {

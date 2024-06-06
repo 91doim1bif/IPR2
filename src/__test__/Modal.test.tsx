@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect'; // For using jest-dom matchers
 
-import Modal from './Modal';
+import Modal from '../components/Profiles/Modal';
 
 describe('Modal Component', () => {
   test('should render without crashing', () => {

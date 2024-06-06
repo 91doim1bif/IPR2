@@ -1,6 +1,6 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 import axios from 'axios';
-import useCurrentUser from './useCurrentUser';
+import { useCurrentUser } from '../hooks/useCurrentUser';
 
 // Mock axios
 jest.mock('axios');

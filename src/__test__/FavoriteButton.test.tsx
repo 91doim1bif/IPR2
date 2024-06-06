@@ -3,8 +3,8 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
-import FavoriteButton from '../FavoriteButton';
-import useFavorites from '../../../hooks/useFavorites';
+import FavoriteButton from '../components/Home/FavoriteButton';
+import useFavorites from '../hooks/useFavorites';
 
 // Mock axios module
 jest.mock('axios');

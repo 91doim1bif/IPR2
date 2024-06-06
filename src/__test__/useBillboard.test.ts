@@ -1,6 +1,6 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 import axios from 'axios';
-import useBillboard from './useBillboard';
+import useBillboard from '../hooks/useBillboard';
 
 // Mock axios
 jest.mock('axios');
@@ -8,13 +8,13 @@ jest.mock('axios');
 describe('useBillboard Hook', () => {
   test('fetches billboard data correctly', async () => {
     const mockData = {
-      _id: '1',
-      title: 'Test Billboard',
-      description: 'Test description',
-      videoUrl: 'https://example.com/video',
-      thumbnailUrl: 'https://example.com/thumbnail',
-      genre: 'Test Genre',
-      duration: '1:30',
+      title: 'Big Buck Bunny',
+      description: 'Big Buck Bunny is a short computer-animated comedy film by the Blender Institute.',
+      videoUrl: '[Big Buck Bunny Video](http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4)',
+      thumbnailUrl: '[Big Buck Bunny Thumbnail](https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217)',
+      genre: 'Animation',
+      duration: '10:34',
+      id: '664a6a887d397d87582c27e0'
     };
 
     axios.get.mockResolvedValueOnce({ data: mockData });

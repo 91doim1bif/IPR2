@@ -4,7 +4,7 @@ import '@testing-library/jest-dom/extend-expect'; // For using jest-dom matchers
 import axios from 'axios';
 import { BrowserRouter } from 'react-router-dom';
 
-import ManageProfiles from './ManageProfiles';
+import ManageProfiles from '../components/Profiles/ManageProfiles';
 
 // Mock axios
 jest.mock('axios');

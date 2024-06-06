@@ -2,8 +2,8 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import Watch from "./Watch";
-import useMovie from "../../hooks/useMovie";
+import Watch from "../components/Home/Watch";
+import useMovie from "../hooks/useMovie";
 
 // Mock for useParams
 jest.mock("react-router-dom", () => ({

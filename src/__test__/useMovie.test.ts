@@ -1,21 +1,21 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 import axios from 'axios';
-import useMovie from './useMovie';
+import useMovie from '../hooks/useMovie';
 
 // Mock axios
 jest.mock('axios');
 
 describe('useMovie Hook', () => {
   test('fetches movie data correctly', async () => {
-    const mockMovieId = '123';
+    const mockMovieId = '664a6a887d397d87582c27e0';
     const mockMovieData = {
-      id: '123',
-      title: 'Test Movie',
-      description: 'This is a test movie',
-      videoUrl: 'https://example.com/movie.mp4',
-      thumbnailUrl: 'https://example.com/movie.jpg',
-      genre: 'Action',
-      duration: '2h 30min',
+      title: 'Big Buck Bunny',
+      description: 'Big Buck Bunny is a short computer-animated comedy film by the Blender Institute.',
+      videoUrl: '[Big Buck Bunny Video](http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4)',
+      thumbnailUrl: '[Big Buck Bunny Thumbnail](https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217)',
+      genre: 'Animation',
+      duration: '10:34',
+      id: '664a6a887d397d87582c27e0'
     };
 
     axios.get.mockResolvedValueOnce({ data: mockMovieData });
@@ -34,7 +34,7 @@ describe('useMovie Hook', () => {
   });
 
   test('handles fetch error correctly', async () => {
-    const mockMovieId = '123';
+    const mockMovieId = '664a6a887d397d87582c27e0';
 
     axios.get.mockRejectedValueOnce(new Error('Failed to fetch movie'));
 

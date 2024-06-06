@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import '@testing-library/jest-dom/extend-expect';
 import axios from "axios";
-import MovieListPage from "./MovieListPage"; // Passe den Pfad an deine Projektstruktur an
+import MovieListPage from "../components/Home/MovieListPage";
 
 // Mock für axios
 jest.mock("axios");
@@ -10,8 +10,8 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("MovieListPage", () => {
   const mockMovies = [
-    { id: "1", title: "Movie 1", thumbnailUrl: "", videoUrl: "", description: "", genre: "", duration: "" },
-    { id: "2", title: "Movie 2", thumbnailUrl: "", videoUrl: "", description: "", genre: "", duration: "" },
+    { title: "Big Buck Bunny", description: "Big Buck Bunny is a short computer-animated comedy film by the Blender Institute.", videoUrl: "[Big Buck Bunny Video](http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4)", thumbnailUrl: "[Big Buck Bunny Thumbnail](https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217)", description: "Big Buck Bunny is a short computer-animated comedy film by the Blender Institute.", genre: "Animation", duration: "10:34", id: '664a6a887d397d87582c27e0'},
+    { title: "Sintel", videoUrl: "[Sintel Video](https://archive.org/download/Sintel/sintel-2048-surround.mp4)", thumbnailUrl: "[Sintel Thumbnail](https://ddz4ak4pa3d19.cloudfront.net/cache/cb/6d/cb6dd0a5f551eec35f896…)", description: "Sintel is a short computer-animated fantasy film by the Blender Institute.", genre: "Fantasy", duration: "14:48", id: "664a6a887d397d87582c27df"}
   ];
 
   beforeEach(() => {

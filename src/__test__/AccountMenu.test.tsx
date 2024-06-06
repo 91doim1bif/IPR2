@@ -1,8 +1,8 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import AccountMenu from "./AccountMenu";
-import { useAuth } from "../Authentifcation/AuthProvider";
+import AccountMenu from "../components/Navbar/AccountMenu";
+import { useAuth } from "../components/Authentifcation/AuthProvider";
 import { createMemoryHistory } from "history";
 
 // Mock the AuthProvider
