@@ -31,7 +31,7 @@ const MovieList: React.FC<MovieListProps> = ({ data, title }) => {
       <div className="grid grid-cols-4 gap-2">
         {data.map((movie) => (
           <MovieCard
-            key={movie.id}
+            key={movie._id}
             data={movie}
             onInfoClick={setSelectedMovieId}
           />
