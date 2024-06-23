@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 interface BillboardData {
-  _id: string; // Füge diese Zeile hinzu
+  _id: string;
   title: string;
   description: string;
   videoUrl: string;
