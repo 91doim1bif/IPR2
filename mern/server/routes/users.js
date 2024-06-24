@@ -85,7 +85,6 @@ router.post("/signin", async (req, res) => {
 
 // Protected route example
 router.get("/profile", verifyToken, async (req, res) => {
-  res.send("You are logged in");
   try {
     const user = await User.findById(req.userId).select("-password");
     if (!user) {
