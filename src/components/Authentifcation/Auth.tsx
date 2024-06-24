@@ -17,7 +17,7 @@ interface AuthState {
 
 const Auth: React.FC = () => {
   const navigate = useNavigate();
-  const { login, register, error: credentials_error } = useAuth();
+  const { login, register, githubLogin, error: credentials_error } = useAuth();
   const [authState, setAuthState] = useState<AuthState>({
     name: "",
     email: "",
@@ -52,7 +52,7 @@ const Auth: React.FC = () => {
   };
 
   const handleGithubLogin = () => {
-    window.location.href = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_ID}&scope=user`;
+    githubLogin();
   };
 
   const toggleVariant = useCallback(() => {
