@@ -43,7 +43,12 @@ const Profiles: React.FC = () => {
 
       const response = await axios.post(
         "http://localhost:3080/api/profiles",
-        { name: newProfileName, image: "images/default-blue.jpg", isChild },
+        {
+          name: newProfileName,
+          image:
+            "/images/avatars/4714992_avatar_man_people_person_profile_icon.png",
+          isChild,
+        },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setProfiles(response.data);

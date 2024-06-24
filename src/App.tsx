@@ -8,6 +8,7 @@ import {
 import Profiles from "./components/Profiles/Profiles";
 import Auth from "./components/Authentifcation/Auth";
 import Home from "./components/Home/Home";
+import Settings from "./components/Settings/Settings";
 import {
   AuthProvider,
   useAuth,
@@ -52,6 +53,14 @@ const App: React.FC = () => {
             element={
               <PrivateRoute>
                 <ManageProfiles />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <PrivateRoute>
+                <Settings />
               </PrivateRoute>
             }
           />

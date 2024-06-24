@@ -58,4 +58,43 @@ router.delete("/profiles/:profileId", verifyToken, async (req, res) => {
   }
 });
 
+router.put("/profiles/:profileId/avatar", verifyToken, async (req, res) => {
+  try {
+    const { profileId } = req.params;
+    const { image } = req.body;
+    console.log(req.params);
+
+    console.log(image);
+
+    const profile = await Profile.findOne({
+      _id: profileId,
+      userId: req.userId,
+    });
+    profile.image = image;
+    await profile.save();
+    res.json({ image: image });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error deleting profile");
+  }
+});
+
+router.put("/profiles/:profileId/name", verifyToken, async (req, res) => {
+  try {
+    const { profileId } = req.params;
+    const { name } = req.body;
+
+    const profile = await Profile.findOne({
+      _id: profileId,
+      userId: req.userId,
+    });
+    profile.name = name;
+    await profile.save();
+    res.json({ name: name });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error changing profile name");
+  }
+});
+
 module.exports = router;

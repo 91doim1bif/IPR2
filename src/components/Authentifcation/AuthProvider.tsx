@@ -76,8 +76,20 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    // Damian: ich weiß es nicht ob es richtig implementiert ist.
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+
     if (token) {
+      // Store the token in local storage
+      localStorage.setItem("token", token);
+      setLoading(false);
+      navigate("/profiles");
+    }
+
+    const StoredToken = localStorage.getItem("token");
+    if (StoredToken) {
+      // -----------------------------------------------------------
       fetchCurrentUser();
     } else {
       setLoading(false);
