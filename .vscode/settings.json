@@ -12,5 +12,6 @@
   },
   "editor.quickSuggestions": {
     "strings": true
-  }
+  },
+  "cSpell.language": "en,de"
 }
