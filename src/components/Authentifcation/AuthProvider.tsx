@@ -65,7 +65,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axiosInstance.get("/api/profile");
+      const response = await axiosInstance.get("/api/currentUser");
+      console.log(response.data);
       setUser(response.data);
     } catch (err) {
       setError("Failed to fetch current user");

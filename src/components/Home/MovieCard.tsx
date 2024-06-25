@@ -6,7 +6,7 @@ import FavoriteButton from "./FavoriteButton";
 import { Movie } from "../../types/movie"; // Pfad anpassen
 
 interface MovieCardProps {
-  data: any;
+  data: Movie;
   onInfoClick: (movieId: string) => void; // Funktion zum Anzeigen weiterer Informationen
 }
 
@@ -99,9 +99,9 @@ const MovieCard: React.FC<MovieCardProps> = ({ data, onInfoClick }) => {
               >
                 <BsFillPlayFill size={30} />
               </div>
-              <FavoriteButton movieId={data.id} />
+              <FavoriteButton movieId={data._id} />
               <div
-                onClick={() => onInfoClick(data.id)}
+                onClick={() => onInfoClick(data._id)}
                 className="
                   ml-auto
                   group/item

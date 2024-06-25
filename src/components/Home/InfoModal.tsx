@@ -74,8 +74,8 @@ const InfoModal: React.FC<InfoModalProps> = ({
                   {movie.title}
                 </p>
                 <div className="flex flex-row gap-4 items-center">
-                  <PlayButton movieId={movie.id} />
-                  <FavoriteButton movieId={movie.id} />
+                  <PlayButton movieId={movie._id} />
+                  <FavoriteButton movieId={movie._id} />
                 </div>
               </div>
             </div>

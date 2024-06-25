@@ -49,33 +49,18 @@ const Navbar: React.FC = () => {
           className="h-5 lg:h-10 cursor-pointer"
           src="/images/logo.png"
           alt="Logo"
-          onClick={() => handleNavigation("/")}
+          onClick={() => handleNavigation("/home")}
         />
         <div className="flex-row ml-8 gap-7 hidden lg:flex">
           <NavbarItem label="Home" onClick={() => handleNavigation("/home")} />
           <NavbarItem
             label="Series"
-            onClick={() => handleNavigation("/series")}
+            onClick={() => handleNavigation("/home")}
           />
-          <NavbarItem
-            label="Films"
-            onClick={() => handleNavigation("/films")}
-          />
-          <NavbarItem
-            label="New & Popular"
-            onClick={() => handleNavigation("/new-popular")}
-          />
+          <NavbarItem label="Films" onClick={() => handleNavigation("/home")} />
           <NavbarItem
             label="My List"
-            onClick={() => handleNavigation("/my-list")}
-          />
-          <NavbarItem
-            label="Browse by languages"
-            onClick={() => handleNavigation("/languages")}
-          />
-          <NavbarItem
-            label="Movie List Page"
-            onClick={() => handleNavigation("/movieListPage")}
+            onClick={() => handleNavigation("/myList")}
           />
         </div>
         <div
