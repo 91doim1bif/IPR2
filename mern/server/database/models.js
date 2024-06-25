@@ -6,6 +6,8 @@ const ProfileSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
   name: { type: String, required: true },
   image: { type: String, required: true },
+  favoriteIds: [],
+  historyIds: [],
 });
 
 // Define the Account schema

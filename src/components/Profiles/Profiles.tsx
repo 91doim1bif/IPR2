@@ -53,6 +53,11 @@ const Profiles: React.FC = () => {
     }
   };
 
+  const go = (profile: any) => {
+    localStorage.setItem("profile", profile._id);
+    navigate(`/home`);
+  };
+
   return (
     <div className="fixed min-h-screen w-full bg-cover bg-center flex items-center h-full justify-center bg-[#141414]">
       <div className="flex flex-col">
@@ -63,7 +68,7 @@ const Profiles: React.FC = () => {
           {profiles.map((profile) => (
             <div
               key={profile._id}
-              onClick={() => navigate(`/home`)}
+              onClick={() => go(profile)}
               className="group flex-row w-44 mx-auto"
             >
               <div className="w-44 h-44 rounded-md flex items-center justify-center border-2 border-transparent group-hover:cursor-pointer group-hover:border-white overflow-hidden">

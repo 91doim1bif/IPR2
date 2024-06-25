@@ -7,7 +7,7 @@ import useFavorites from "../../hooks/useFavorites";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import Navbar from "../Navbar/Navbar";
 
-const Home: React.FC = () => {
+const MyList: React.FC = () => {
   const { user: currentUser } = useCurrentUser();
   const { data: movies, isLoading: moviesLoading } = useMovieList();
   const {
@@ -38,19 +38,18 @@ const Home: React.FC = () => {
   if (moviesLoading || favoritesLoading) {
     return (
       <div className="flex items-center justify-center h-screen bg-[#141414] text-white">
-        <h1>Loading...</h1>
+        Loading...
       </div>
     );
   }
 
   return (
-    <div className="bg-cover h-full bg-[#141414]">
+    <div className="min-h-screen bg-[#141414]">
       <Navbar />
-      <Billboard onInfoClick={handleOpenModal} />
-      <div className="pb-40">
+      <div className="py-20 px-4">
         <MovieList
-          title="Trending Now"
-          data={movies}
+          title="My List"
+          data={favorites}
           onInfoClick={handleOpenModal}
         />
       </div>
@@ -66,4 +65,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default MyList;

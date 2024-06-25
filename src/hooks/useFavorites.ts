@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Movie } from "../types/movie"; // Ensure the path is correct
 
-const useFavorites = (favoriteIds: string[]) => {
+const useFavorites = () => {
   const [favorites, setFavorites] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -11,14 +11,11 @@ const useFavorites = (favoriteIds: string[]) => {
     try {
       setIsLoading(true);
       setError(null); // Clear previous error
-      if (favoriteIds.length === 0) {
-        setFavorites([]);
-        setIsLoading(false);
-        return;
-      }
-      const response = await axios.get("http://localhost:3080/api/favorites", {
-        params: { ids: favoriteIds.join(",") },
-      });
+      let profileID = localStorage.getItem("profile");
+
+      const response = await axios.get(
+        `http://localhost:3080/api/favorites/${profileID}`
+      );
       setFavorites(response.data);
     } catch (error) {
       console.error("Failed to fetch favorites", error);
@@ -26,11 +23,11 @@ const useFavorites = (favoriteIds: string[]) => {
     } finally {
       setIsLoading(false);
     }
-  }, [favoriteIds]);
+  }, []);
 
   useEffect(() => {
     fetchFavorites();
-  }, [favoriteIds, fetchFavorites]);
+  }, [, fetchFavorites]);
 
   return { favorites, isLoading, error, fetchFavorites };
 };

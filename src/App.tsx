@@ -17,6 +17,7 @@ import { useLocation } from "react-router-dom";
 import ManageProfiles from "./components/Profiles/ManageProfiles";
 import Watch from "./components/Home/Watch";
 import MovieListPage from "./components/Home/MovieListPage";
+import MyList from "./components/Home/MyList";
 
 const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -68,6 +69,14 @@ const App: React.FC = () => {
             element={
               <PrivateRoute>
                 <Home />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/myList"
+            element={
+              <PrivateRoute>
+                <MyList />
               </PrivateRoute>
             }
           />

@@ -27,7 +27,23 @@ export const useCurrentUser = (): UseCurrentUserResult => {
     setError(null);
 
     try {
-      const response = await axios.get("/api/currentUser");
+      const token = localStorage.getItem("token"); // Assuming token is stored in localStorage
+
+      if (!token) {
+        setError("No token found");
+        setLoading(false);
+        return;
+      }
+
+      const response = await axios.get(
+        "http://localhost:3080/api/currentUser",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
       setUser(response.data);
     } catch (err) {
       setError("Failed to fetch current user");
