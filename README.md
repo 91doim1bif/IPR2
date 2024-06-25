@@ -1,6 +1,5 @@
 # Feauters
 
-Features:
 1. VerifyToken
 2. Login
 3. Register
