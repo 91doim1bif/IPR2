@@ -51,6 +51,7 @@ const MyList: React.FC = () => {
           title="My List"
           data={favorites}
           onInfoClick={handleOpenModal}
+          history={false}
         />
       </div>
       {movieId && (

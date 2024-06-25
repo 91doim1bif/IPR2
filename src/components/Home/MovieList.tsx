@@ -8,9 +8,15 @@ interface MovieListProps {
   data: Movie[];
   title: string;
   onInfoClick: (movieId: string) => void; // Funktion zum Anzeigen weiterer Informationen
+  history: boolean;
 }
 
-const MovieList: React.FC<MovieListProps> = ({ data, title, onInfoClick }) => {
+const MovieList: React.FC<MovieListProps> = ({
+  data,
+  title,
+  onInfoClick,
+  history,
+}) => {
   const [selectedMovieId, setSelectedMovieId] = useState<string | null>(null);
 
   if (isEmpty(data)) {
@@ -31,7 +37,12 @@ const MovieList: React.FC<MovieListProps> = ({ data, title, onInfoClick }) => {
       </p>
       <div className="grid grid-cols-4 gap-2">
         {data.map((movie) => (
-          <MovieCard key={movie._id} data={movie} onInfoClick={onInfoClick} />
+          <MovieCard
+            key={movie._id}
+            data={movie}
+            onInfoClick={onInfoClick}
+            history={history}
+          />
         ))}
       </div>
       {selectedMovieId && (
