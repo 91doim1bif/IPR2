@@ -104,6 +104,8 @@ const userRoutes = require("./routes/users");
 const profileRoutes = require("./routes/profiles");
 const moiveRoutes = require("./routes/movies");
 const favoriteRoutes = require("./routes/favorites");
+const historieRoutes = require("./routes/history");
+app.use("/api", historieRoutes);
 app.use("/api", favoriteRoutes);
 app.use("/api", moiveRoutes);
 app.use("/api", userRoutes);

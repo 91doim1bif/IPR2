@@ -4,11 +4,14 @@ import NavbarItem from "./NavbarItem";
 import AccountMenu from "./AccountMenu";
 import MobileMenu from "./MobileMenu";
 import { BsSearch, BsBell, BsChevronDown } from "react-icons/bs";
+import axios from "axios";
 
 const Navbar: React.FC = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
+  const [profile, setProfile] = useState<any>(null);
+  const [loadingProfile, setLoadingProfile] = useState(true);
   const navigate = useNavigate();
 
   const handleScroll = useCallback(() => {
@@ -16,6 +19,26 @@ const Navbar: React.FC = () => {
       setShowBackground(true);
     } else {
       setShowBackground(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const profileId = localStorage.getItem("profile");
+    if (profileId) {
+      // Fetch the profile details from the API
+      axios
+        .get(`http://localhost:3080/api/profile/${profileId}`)
+        .then((response) => {
+          setProfile(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching profile name:", error);
+        })
+        .finally(() => {
+          setLoadingProfile(false);
+        });
+    } else {
+      setLoadingProfile(false);
     }
   }, []);
 
@@ -47,35 +70,20 @@ const Navbar: React.FC = () => {
       >
         <img
           className="h-5 lg:h-10 cursor-pointer"
-          src="/images/logo.png"
+          src={"./images/logo.png"}
           alt="Logo"
-          onClick={() => handleNavigation("/")}
+          onClick={() => handleNavigation("/home")}
         />
         <div className="flex-row ml-8 gap-7 hidden lg:flex">
           <NavbarItem label="Home" onClick={() => handleNavigation("/home")} />
           <NavbarItem
             label="Series"
-            onClick={() => handleNavigation("/series")}
+            onClick={() => handleNavigation("/home")}
           />
-          <NavbarItem
-            label="Films"
-            onClick={() => handleNavigation("/films")}
-          />
-          <NavbarItem
-            label="New & Popular"
-            onClick={() => handleNavigation("/new-popular")}
-          />
+          <NavbarItem label="Films" onClick={() => handleNavigation("/home")} />
           <NavbarItem
             label="My List"
-            onClick={() => handleNavigation("/my-list")}
-          />
-          <NavbarItem
-            label="Browse by languages"
-            onClick={() => handleNavigation("/languages")}
-          />
-          <NavbarItem
-            label="Movie List Page"
-            onClick={() => handleNavigation("/movieListPage")}
+            onClick={() => handleNavigation("/myList")}
           />
         </div>
         <div
@@ -97,20 +105,22 @@ const Navbar: React.FC = () => {
           <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
             <BsBell />
           </div>
-          <div
-            onClick={toggleAccountMenu}
-            className="flex flex-row items-center gap-2 cursor-pointer relative"
-          >
-            <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden">
-              <img src="/images/default-blue.jpg" alt="Profile" />
+          {!loadingProfile && profile && (
+            <div
+              onClick={toggleAccountMenu}
+              className="flex flex-row items-center gap-2 cursor-pointer relative"
+            >
+              <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden">
+                <img src={profile.image} alt="Profile" />
+              </div>
+              <BsChevronDown
+                className={`text-white transition ${
+                  showAccountMenu ? "rotate-180" : "rotate-0"
+                }`}
+              />
+              <AccountMenu visible={showAccountMenu} />
             </div>
-            <BsChevronDown
-              className={`text-white transition ${
-                showAccountMenu ? "rotate-180" : "rotate-0"
-              }`}
-            />
-            <AccountMenu visible={showAccountMenu} />
-          </div>
+          )}
         </div>
       </div>
     </nav>

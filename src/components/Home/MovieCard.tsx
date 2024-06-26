@@ -1,18 +1,65 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsFillPlayFill } from "react-icons/bs";
-import { BiChevronDown } from "react-icons/bi";
+import { BiChevronDown, BiX } from "react-icons/bi";
 import FavoriteButton from "./FavoriteButton";
 import { Movie } from "../../types/movie"; // Pfad anpassen
+import axios from "axios";
+import useHistories from "../../hooks/useHistories";
 
 interface MovieCardProps {
-  data: any;
+  data: Movie;
   onInfoClick: (movieId: string) => void; // Funktion zum Anzeigen weiterer Informationen
+  history: boolean;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ data, onInfoClick }) => {
+const MovieCard: React.FC<MovieCardProps> = ({
+  data,
+  onInfoClick,
+  history,
+}) => {
   const navigate = useNavigate();
+  const { histories, isLoading: historiesLoading } = useHistories();
   const [isHovered, setIsHovered] = useState(false);
+
+  const addHistory = async (movieIdd: string) => {
+    if (historiesLoading) {
+      return; // Wait until histories are loaded
+    }
+
+    // Check if the movie ID already exists in histories
+    const movieExists = histories.some((history) => history._id === movieIdd);
+
+    if (movieExists) {
+      navigate(`/watch/${movieIdd}`);
+      return;
+    }
+
+    let currentProfile = localStorage.getItem("profile");
+    try {
+      const response = await axios.post(
+        `http://localhost:3080/api/histories/${currentProfile}`,
+        {
+          movieId: movieIdd,
+        }
+      );
+      navigate(`/watch/${movieIdd}`);
+    } catch (error) {
+      console.error("Error adding histories:", error);
+    }
+  };
+
+  const del = async (movieIdd: any) => {
+    let currentProfile = localStorage.getItem("profile");
+    try {
+      const response = await axios.delete(
+        `http://localhost:3080/api/history/${currentProfile}/${movieIdd}`
+      );
+      window.location.reload();
+    } catch (error) {
+      console.error("Error adding histories:", error);
+    }
+  };
 
   return (
     <div
@@ -95,13 +142,31 @@ const MovieCard: React.FC<MovieCardProps> = ({ data, onInfoClick }) => {
                   transition
                   hover:bg-neutral-300
                 "
-                onClick={() => navigate(`/watch/${data._id}`)}
+                onClick={() => addHistory(data._id)}
               >
                 <BsFillPlayFill size={30} />
               </div>
-              <FavoriteButton movieId={data.id} />
+              <FavoriteButton movieId={data._id} />
+              {history && (
+                <div
+                  className="
+                    bg-white
+                    rounded-full
+                    h-10
+                    w-10
+                    flex
+                    justify-center
+                    items-center
+                    transition
+                    hover:bg-neutral-300
+                  "
+                  onClick={() => del(data._id)}
+                >
+                  <BiX size={30} />
+                </div>
+              )}
               <div
-                onClick={() => onInfoClick(data.id)}
+                onClick={() => onInfoClick(data._id)}
                 className="
                   ml-auto
                   group/item

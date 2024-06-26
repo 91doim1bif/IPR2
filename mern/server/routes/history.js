@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { User, Profile, Movie } = require("../database/models");
+const { Profile, Movie } = require("../database/models");
 
-// POST /api/favorite
-router.post("/favorite/:ProfileID", async (req, res) => {
+// POST /api/history
+router.post("/histories/:ProfileID", async (req, res) => {
   const { movieId } = req.body;
 
   if (!movieId) {
@@ -17,40 +17,40 @@ router.post("/favorite/:ProfileID", async (req, res) => {
     }
 
     const profile = await Profile.findById(req.params.ProfileID);
-    //if (profile.favoriteIds.includes(movieId)) {
-    //  return res.status(400).send("Movie is already in favorites");
+    //if (profile.historyIds.includes(movieId)) {
+    //  return res.status(400).send("Movie is already in histories");
     //}
 
-    profile.favoriteIds.push(movieId);
+    profile.historyIds.push(movieId);
     await profile.save();
 
-    res.status(200).send("Movie added to favorites");
+    res.status(200).send("Movie added to histories");
   } catch (error) {
     res.status(500).send("Server error");
   }
 });
 
-// DELETE /api/favorite/:movieId
-router.delete("/favorite/:ProfileID/:movieId", async (req, res) => {
+// DELETE /api/history/:movieId
+router.delete("/history/:ProfileID/:movieId", async (req, res) => {
   const movieId = req.params.movieId;
 
   try {
     const profile = await Profile.findById(req.params.ProfileID);
-    const index = profile.favoriteIds.indexOf(movieId);
+    const index = profile.historyIds.indexOf(movieId);
     if (index === -1) {
-      return res.status(400).send("Movie is not in favorites");
+      return res.status(400).send("Movie is not in histories");
     }
 
-    profile.favoriteIds.splice(index, 1);
+    profile.historyIds.splice(index, 1);
     await profile.save();
 
-    res.status(200).send("Movie removed from favorites");
+    res.status(200).send("Movie removed from histories");
   } catch (error) {
     res.status(500).send("Server error");
   }
 });
 
-router.get("/favorites/:ProfileID", async (req, res) => {
+router.get("/histories/:ProfileID", async (req, res) => {
   try {
     const profile = await Profile.findById(req.params.ProfileID);
     if (!profile) {
@@ -58,7 +58,7 @@ router.get("/favorites/:ProfileID", async (req, res) => {
     }
 
     const movies = await Promise.all(
-      profile.favoriteIds.map((movieId) => Movie.findById(movieId))
+      profile.historyIds.map((movieId) => Movie.findById(movieId))
     );
 
     res.status(200).json(movies);

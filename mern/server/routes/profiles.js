@@ -15,6 +15,17 @@ router.get("/profiles", verifyToken, async (req, res) => {
   }
 });
 
+// Get profile name
+router.get("/profile/:ProfileID", async (req, res) => {
+  try {
+    const profile = await Profile.findById(req.params.ProfileID);
+    res.status(200).json(profile);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error fetching profiles");
+  }
+});
+
 // Add a new profile
 router.post("/profiles", verifyToken, async (req, res) => {
   try {

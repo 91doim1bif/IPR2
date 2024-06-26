@@ -6,10 +6,8 @@ import useMovieList from "../../hooks/useMovieList";
 import useFavorites from "../../hooks/useFavorites";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import Navbar from "../Navbar/Navbar";
-import axios from "axios";
-import useHistories from "../../hooks/useHistories";
 
-const Home: React.FC = () => {
+const MyList: React.FC = () => {
   const { user: currentUser } = useCurrentUser();
   const { data: movies, isLoading: moviesLoading } = useMovieList();
   const {
@@ -17,10 +15,8 @@ const Home: React.FC = () => {
     isLoading: favoritesLoading,
     fetchFavorites,
   } = useFavorites();
-  const { histories, isLoading: historiesLoading } = useHistories();
   const [movieId, setMovieId] = useState<string | null>(null);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
-  const [profile, setProfile] = useState<any>();
 
   const handleCloseModal = () => {
     setIsModalVisible(false);
@@ -32,57 +28,33 @@ const Home: React.FC = () => {
     setIsModalVisible(true);
   };
 
-  useEffect(() => {
-    const profileId = localStorage.getItem("profile");
-    if (profileId) {
-      axios
-        .get(`http://localhost:3080/api/profile/${profileId}`)
-        .then((response) => {
-          setProfile(response.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching profile name:", error);
-        });
-    }
-  }, []);
-
+  // Refresh favorites whenever the modal is closed
   useEffect(() => {
     if (!isModalVisible) {
       fetchFavorites();
     }
-  }, [fetchFavorites, histories.length]);
+  }, [isModalVisible, fetchFavorites, favorites.length]);
 
-  if (moviesLoading || favoritesLoading || historiesLoading) {
+  if (moviesLoading || favoritesLoading) {
     return (
       <div className="flex items-center justify-center h-screen bg-[#141414] text-white">
-        <h1>Loading...</h1>
+        Loading...
       </div>
     );
   }
 
   return (
-    <div className="bg-cover h-full bg-[#141414]">
+    <div className="min-h-screen bg-[#141414]">
       <Navbar />
-      <Billboard onInfoClick={handleOpenModal} />
-      {histories.length > 0 && profile && (
-        <div className="pb-40">
-          <MovieList
-            title={`Mit dem Profil von ${profile.name} weiter anschauen`}
-            data={histories}
-            onInfoClick={handleOpenModal}
-            history={true}
-          />
-        </div>
-      )}
-      <div className="pb-40">
+      <div className="py-20 px-4">
         <MovieList
-          title="Trending Now"
-          data={movies}
+          title="My List"
+          data={favorites}
           onInfoClick={handleOpenModal}
           history={false}
         />
       </div>
-      {isModalVisible && movieId && (
+      {movieId && (
         <InfoModal
           visible={isModalVisible}
           onClose={handleCloseModal}
@@ -94,4 +66,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default MyList;
