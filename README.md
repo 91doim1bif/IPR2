@@ -1,12 +1,33 @@
+# Feauters
+
+1. VerifyToken
+2. Login
+3. Register
+4. Profile anzeigen
+5. Profile entfernen
+6. Profile ändern
+7. Profilbild ändern
+8. Billboard
+9. Videos anzeigen
+10. Videos abspielen
+11. Videos favorisieren
+12. Video Wiedergabe mit zurück Button
+13. Suche
+14. Watchlist ("My List")
+15. Aus Watchlist Videos entfernen
+16. Verlauf
+17. Videos aus Verlauf löschen
+18. Navigation Bar
+19. Account bearbeiten
+20. Account entfernen
+21. Mobile Ansicht
+
+
 # Movie List Anwendung
 
 ## Übersicht
 
 Diese Anwendung ermöglicht es Benutzern, Filme anzuzeigen, hinzuzufügen, zu bearbeiten und zu löschen. Sie beinhaltet auch Funktionen zur Benutzerauthentifizierung, Profilverwaltung und zum Ansehen einzelner Filmdetails.
-
-Wir werden uns auf dieses Tutorial konzentrieren:
-
-[YouTube Tutorial](https://www.youtube.com/watch?v=mqUN4N2q4qY)
 
 <details>
   <summary>Diese Modelle wurden gezeigt</summary>

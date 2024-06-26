@@ -84,7 +84,7 @@ router.post("/signin", async (req, res) => {
 });
 
 // Protected route example
-router.get("/profile", verifyToken, async (req, res) => {
+router.get("/currentUser", verifyToken, async (req, res) => {
   try {
     const user = await User.findById(req.userId).select("-password");
     if (!user) {
@@ -94,6 +94,59 @@ router.get("/profile", verifyToken, async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send("Error fetching user profile");
+  }
+});
+
+router.delete("/user", verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    await User.findByIdAndDelete(req.userId);
+    res.status(200).json({ message: "Account deleted successfully" });
+  } catch (err) {
+    console.error("Error deleting user:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+router.get("/user/email", verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).select("email");
+    console.log(user);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({ email: user.email });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error fetching user email");
+  }
+});
+
+router.put("/user/email", verifyToken, async (req, res) => {
+  const { newEmail } = req.body;
+  console.error(newEmail);
+
+  if (!newEmail) {
+    return res.status(400).json({ message: "New email address is required" });
+  }
+
+  try {
+    const user = await User.findById(req.userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.email = newEmail;
+    await user.save();
+
+    res.status(200).json({ email: user.email });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error updating user email");
   }
 });
 

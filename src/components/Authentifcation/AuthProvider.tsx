@@ -35,7 +35,7 @@ interface AuthProviderProps {
 }
 
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL || "http://localhost:5000",
+  baseURL: process.env.REACT_APP_API_BASE_URL || "http://localhost:3080",
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -65,7 +65,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axiosInstance.get("/api/profile");
+      const response = await axiosInstance.get("/api/currentUser");
+      console.log(response.data);
       setUser(response.data);
     } catch (err) {
       setError("Failed to fetch current user");
@@ -76,8 +77,20 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    // Damian: ich weiß es nicht ob es richtig implementiert ist.
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+
     if (token) {
+      // Store the token in local storage
+      localStorage.setItem("token", token);
+      setLoading(false);
+      navigate("/profiles");
+    }
+
+    const StoredToken = localStorage.getItem("token");
+    if (StoredToken) {
+      // -----------------------------------------------------------
       fetchCurrentUser();
     } else {
       setLoading(false);
@@ -131,13 +144,13 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   const googleLogin = () => {
     window.location.href = `${
-      process.env.REACT_APP_API_BASE_URL || "http://localhost:5000"
+      process.env.REACT_APP_API_BASE_URL || "http://localhost:3080"
     }/auth/google`;
   };
 
   const githubLogin = () => {
     window.location.href = `${
-      process.env.REACT_APP_API_BASE_URL || "http://localhost:5000"
+      process.env.REACT_APP_API_BASE_URL || "http://localhost:3080"
     }/auth/github`;
   };
 

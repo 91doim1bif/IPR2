@@ -1,17 +1,47 @@
+import axios from "axios";
 import React from "react";
 import { BsFillPlayFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import useHistories from "../../hooks/useHistories";
 
 interface PlayButtonProps {
   movieId: string;
 }
 
 const PlayButton: React.FC<PlayButtonProps> = ({ movieId }) => {
+  const { histories, isLoading: historiesLoading } = useHistories();
   const navigate = useNavigate();
+
+  const addHistory = async (movieIdd: string) => {
+    if (historiesLoading) {
+      return; // Wait until histories are loaded
+    }
+
+    // Check if the movie ID already exists in histories
+    const movieExists = histories.some((history) => history._id === movieIdd);
+
+    if (movieExists) {
+      navigate(`/watch/${movieIdd}`);
+      return;
+    }
+
+    let currentProfile = localStorage.getItem("profile");
+    try {
+      const response = await axios.post(
+        `http://localhost:3080/api/histories/${currentProfile}`,
+        {
+          movieId: movieIdd,
+        }
+      );
+      navigate(`/watch/${movieIdd}`);
+    } catch (error) {
+      console.error("Error adding histories:", error);
+    }
+  };
 
   return (
     <button
-      onClick={() => navigate(`/watch/${movieId}`)}
+      onClick={() => addHistory(movieId)}
       className="
         bg-white
         rounded-md

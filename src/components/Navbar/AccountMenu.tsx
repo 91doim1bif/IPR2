@@ -23,6 +23,10 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
     navigate("/profiles"); // Redirect to profiles management page
   };
 
+  const handleSettings = () => {
+    navigate("/settings"); // Redirect to profiles management page
+  };
+
   return (
     <div className="bg-black w-48 absolute top-14 right-0 py-5 flex-col border-2 border-gray-800">
       <div className="flex flex-col gap-3">
@@ -34,6 +38,12 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
           className="px-3 py-2 text-left text-white text-sm hover:underline"
         >
           Switch Profiles
+        </button>
+        <button
+          onClick={handleSettings}
+          className="px-3 py-2 text-left text-white text-sm hover:underline"
+        >
+          Settings
         </button>
         <button
           onClick={handleLogout}

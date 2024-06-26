@@ -1,4 +1,5 @@
 const express = require("express");
+const session = require("express-session");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const passport = require("passport");
@@ -6,6 +7,7 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const GitHubStrategy = require("passport-github2").Strategy;
 const jwt = require("jsonwebtoken");
 const { User } = require("./database/models");
+const cookieSession = require("cookie-session");
 
 const app = express();
 
@@ -19,9 +21,21 @@ const GOOGLE_CLIENT_SECRET = "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";
 const GITHUB_CLIENT_ID = "Ov23liVOK2gky6X51zBF";
 const GITHUB_CLIENT_SECRET = "022b6a4991c9356b8f26ac2f485a643b3606514d";
 const FRONTEND_URL = "http://localhost:3000";
+const SESSION_SECRET = "SESSION_SECRET";
+app.use(
+  session({ secret: "keyboard cat", resave: false, saveUninitialized: false })
+);
+
+// app.use(
+//   cookieSession({
+//     maxAge: 24 * 60 * 60 * 1000, //ms
+//     keys: [SESSION_SECRET],
+//   })
+// );
 
 // Initialize Passport
 app.use(passport.initialize());
+app.use(passport.session());
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -39,7 +53,7 @@ passport.use(
     {
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:5000/auth/google/callback",
+      callbackURL: "http://localhost:3080/auth/google/callback",
     },
     async (token, tokenSecret, profile, done) => {
       let user = await User.findOne({ googleId: profile.id });
@@ -61,15 +75,15 @@ passport.use(
     {
       clientID: GITHUB_CLIENT_ID,
       clientSecret: GITHUB_CLIENT_SECRET,
-      callbackURL: "http://localhost:5000/auth/github/ccallback",
+      callbackURL: "http://localhost:3080/auth/github/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
-      let user = await User.findOne({ githubId: profile.id });
+      let user = await User.findOne({ email: profile.username + "@mail.de" });
       if (!user) {
         user = await new User({
-          githubId: profile.id,
+          userId: profile.id,
           name: profile.displayName,
-          email: profile.emails[0].value,
+          email: profile.username + "@mail.de",
         }).save();
       }
       return done(null, user);
@@ -91,6 +105,8 @@ const userRoutes = require("./routes/users");
 const profileRoutes = require("./routes/profiles");
 const moiveRoutes = require("./routes/movies");
 const favoriteRoutes = require("./routes/favorites");
+const historieRoutes = require("./routes/history");
+app.use("/api", historieRoutes);
 app.use("/api", favoriteRoutes);
 app.use("/api", moiveRoutes);
 app.use("/api", userRoutes);
@@ -118,12 +134,14 @@ app.get(
 
 app.get(
   "/auth/github",
-  passport.authenticate("github", { scope: ["user:email"] })
+  passport.authenticate("github", {
+    scope: ["user:email"],
+  })
 );
 
 app.get(
   "/auth/github/callback",
-  passport.authenticate("github", { failureRedirect: "/" }),
+  passport.authenticate("github", { failureRedirect: "/auth" }),
   (req, res) => {
     // Create JWT token
     const token = jwt.sign(
@@ -142,7 +160,7 @@ mongoose
   })
   .then(() => {
     console.log("MongoDB connected");
-    const PORT = process.env.PORT || 5000;
+    const PORT = process.env.PORT || 3080;
     app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
   })
   .catch((err) => {

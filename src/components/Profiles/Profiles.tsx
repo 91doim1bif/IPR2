@@ -19,7 +19,7 @@ const Profiles: React.FC = () => {
           return;
         }
 
-        const response = await axios.get("http://localhost:5000/api/profiles", {
+        const response = await axios.get("http://localhost:3080/api/profiles", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -42,8 +42,13 @@ const Profiles: React.FC = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:5000/api/profiles",
-        { name: newProfileName, image: "images/default-blue.jpg", isChild },
+        "http://localhost:3080/api/profiles",
+        {
+          name: newProfileName,
+          image:
+            "/images/avatars/4714992_avatar_man_people_person_profile_icon.png",
+          isChild,
+        },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setProfiles(response.data);
@@ -51,6 +56,11 @@ const Profiles: React.FC = () => {
     } catch (error) {
       console.error("Failed to add profile", error);
     }
+  };
+
+  const go = (profile: any) => {
+    localStorage.setItem("profile", profile._id);
+    navigate(`/home`);
   };
 
   return (
@@ -63,7 +73,7 @@ const Profiles: React.FC = () => {
           {profiles.map((profile) => (
             <div
               key={profile._id}
-              onClick={() => navigate(`/home`)}
+              onClick={() => go(profile)}
               className="group flex-row w-44 mx-auto"
             >
               <div className="w-44 h-44 rounded-md flex items-center justify-center border-2 border-transparent group-hover:cursor-pointer group-hover:border-white overflow-hidden">

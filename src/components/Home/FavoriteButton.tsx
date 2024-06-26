@@ -11,12 +11,10 @@ interface FavoriteButtonProps {
 
 const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
   const { user: currentUser, mutate: mutateUser } = useCurrentUser();
-  const { favorites, isLoading, fetchFavorites } = useFavorites(
-    currentUser?.favoriteIds || []
-  );
+  const { favorites, isLoading, fetchFavorites } = useFavorites();
 
   const isFavorite = useMemo(() => {
-    return favorites.some((movie) => movie.id === movieId);
+    return favorites.some((movie) => movie._id === movieId);
   }, [favorites, movieId]);
 
   const toggleFavorite = useCallback(async () => {
@@ -24,12 +22,21 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
       return;
     }
 
+    let currentProfile = localStorage.getItem("profile");
+
     try {
       let response;
       if (isFavorite) {
-        response = await axios.delete(`/api/favorite/${movieId}`);
+        response = await axios.delete(
+          `http://localhost:3080/api/favorite/${currentProfile}/${movieId}`
+        );
       } else {
-        response = await axios.post("/api/favorite", { movieId });
+        response = await axios.post(
+          `http://localhost:3080/api/favorite/${currentProfile}`,
+          {
+            movieId,
+          }
+        );
       }
 
       if (response.status === 200) {

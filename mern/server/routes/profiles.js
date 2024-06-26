@@ -15,6 +15,17 @@ router.get("/profiles", verifyToken, async (req, res) => {
   }
 });
 
+// Get profile name
+router.get("/profile/:ProfileID", async (req, res) => {
+  try {
+    const profile = await Profile.findById(req.params.ProfileID);
+    res.status(200).json(profile);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error fetching profiles");
+  }
+});
+
 // Add a new profile
 router.post("/profiles", verifyToken, async (req, res) => {
   try {
@@ -55,6 +66,45 @@ router.delete("/profiles/:profileId", verifyToken, async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send("Error deleting profile");
+  }
+});
+
+router.put("/profiles/:profileId/avatar", verifyToken, async (req, res) => {
+  try {
+    const { profileId } = req.params;
+    const { image } = req.body;
+    console.log(req.params);
+
+    console.log(image);
+
+    const profile = await Profile.findOne({
+      _id: profileId,
+      userId: req.userId,
+    });
+    profile.image = image;
+    await profile.save();
+    res.json({ image: image });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error deleting profile");
+  }
+});
+
+router.put("/profiles/:profileId/name", verifyToken, async (req, res) => {
+  try {
+    const { profileId } = req.params;
+    const { name } = req.body;
+
+    const profile = await Profile.findOne({
+      _id: profileId,
+      userId: req.userId,
+    });
+    profile.name = name;
+    await profile.save();
+    res.json({ name: name });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error changing profile name");
   }
 });
 

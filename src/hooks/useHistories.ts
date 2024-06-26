@@ -2,34 +2,34 @@ import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Movie } from "../types/movie"; // Ensure the path is correct
 
-const useFavorites = () => {
-  const [favorites, setFavorites] = useState<Movie[]>([]);
+const useHistories = () => {
+  const [histories, setHistories] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchFavorites = useCallback(async () => {
+  const fetchHistories = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null); // Clear previous error
       let profileID = localStorage.getItem("profile");
 
       const response = await axios.get(
-        `http://localhost:3080/api/favorites/${profileID}`
+        `http://localhost:3080/api/histories/${profileID}`
       );
-      setFavorites(response.data);
+      setHistories(response.data);
     } catch (error) {
-      console.error("Failed to fetch favorites", error);
-      setError("Failed to fetch favorites");
+      console.error("Failed to fetch histories", error);
+      setError("Failed to fetch histories");
     } finally {
       setIsLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    fetchFavorites();
-  }, [, fetchFavorites]);
+    fetchHistories();
+  }, [, fetchHistories]);
 
-  return { favorites, isLoading, error, fetchFavorites };
+  return { histories, isLoading, error, fetchHistories };
 };
 
-export default useFavorites;
+export default useHistories;
