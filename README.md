@@ -21,6 +21,7 @@
 19. Account bearbeiten
 20. Account entfernen
 21. Mobile Ansicht
+22. Bilboard: Kategorien 
 
 
 # Movie List Anwendung
