@@ -1,15 +1,32 @@
-codecov:
-  notify:
-    require_ci_to_pass: yes
+name: CI
 
-coverage:
-  precision: 2
-  round: down
-  range: "70...100"
-  status:
-    project:
-      default:
-        target: 80%
-    patch:
-      default:
-        target: 80%
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Test and Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - run: npm install
+      - run: npm run test:ci
+      - run: npm run build  
+
+      - name: Build and test with Docker
+        run: |
+          docker build -t my-react-app .
+          docker run my-react-app npm test -- --coverage --watchAll=false
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
