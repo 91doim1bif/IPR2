@@ -3,36 +3,100 @@ import { useNavigate } from "react-router-dom";
 import NavbarItem from "./NavbarItem";
 import AccountMenu from "./AccountMenu";
 import MobileMenu from "./MobileMenu";
-import { BsSearch, BsBell, BsChevronDown } from "react-icons/bs";
+import useMovieList from "../../hooks/useMovieList";
+import { BsBell, BsChevronDown, BsSearch } from "react-icons/bs";
 import axios from "axios";
+import Select, { StylesConfig } from "react-select";
+import useHistories from "../../hooks/useHistories";
+
+const customStyles: StylesConfig = {
+  control: (provided) => ({
+    ...provided,
+    backgroundColor: "transparent",
+    border: "none",
+    borderBottom: "1px solid #CBD5E0",
+    borderRadius: 0,
+    boxShadow: "none",
+    width: "300px", // Adjust width of the search field
+    margin: "0 auto", // Center the search field
+    minHeight: "auto",
+  }),
+  dropdownIndicator: (provided) => ({
+    ...provided,
+    color: "#CBD5E0",
+  }),
+  indicatorSeparator: () => ({
+    display: "none",
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: "#E2E8F0",
+  }),
+  input: (provided) => ({
+    ...provided,
+    color: "#E2E8F0",
+  }),
+  placeholder: (provided) => ({
+    ...provided,
+    color: "#CBD5E0",
+  }),
+  menu: (provided) => ({
+    ...provided,
+    backgroundColor: "rgba(0, 0, 0, 0.8)", // Transparent black background
+    borderRadius: 0,
+    boxShadow: "none",
+    color: "#fff", // Set text color to white
+  }),
+};
 
 const Navbar: React.FC = () => {
+  const { histories, isLoading: historiesLoading } = useHistories();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
   const [profile, setProfile] = useState<any>(null);
   const [loadingProfile, setLoadingProfile] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [options, setOptions] = useState<any[]>([]);
   const navigate = useNavigate();
+  const { data: movies } = useMovieList();
 
   const handleScroll = useCallback(() => {
-    if (window.scrollY > 50) {
-      setShowBackground(true);
-    } else {
-      setShowBackground(false);
-    }
+    setShowBackground(window.scrollY > 50);
   }, []);
+
+  const addHistory = async (movieId: string) => {
+    if (historiesLoading) {
+      return; // Wait until histories are loaded
+    }
+
+    // Check if the movie ID already exists in histories
+    const movieExists = histories.some((history) => history._id === movieId);
+
+    if (!movieExists) {
+      try {
+        await axios.post(`http://localhost:3080/api/histories/${movieId}`, {
+          movieId,
+        });
+      } catch (error) {
+        console.error("Error adding history:", error);
+      }
+    }
+
+    // Navigate to watch page after adding to history
+    navigate(`/watch/${movieId}`);
+  };
 
   useEffect(() => {
     const profileId = localStorage.getItem("profile");
     if (profileId) {
-      // Fetch the profile details from the API
       axios
         .get(`http://localhost:3080/api/profile/${profileId}`)
         .then((response) => {
           setProfile(response.data);
         })
         .catch((error) => {
-          console.error("Error fetching profile name:", error);
+          console.error("Error fetching profile:", error);
         })
         .finally(() => {
           setLoadingProfile(false);
@@ -61,6 +125,31 @@ const Navbar: React.FC = () => {
     navigate(path);
   };
 
+  const handleSearchChange = (selectedOption: any) => {
+    if (selectedOption) {
+      setSearchQuery(""); // Clear search input after selection
+      addHistory(selectedOption.value);
+    }
+  };
+
+  const handleSearchInputChange = (inputValue: string) => {
+    const inputValueLower = inputValue.toLowerCase();
+    const filteredOptions = movies
+      .filter((movie) => movie.title.toLowerCase().includes(inputValueLower))
+      .slice(0, 3) // Limitiert die Liste auf die ersten 3 Elemente
+      .map((movie) => ({
+        value: movie._id,
+        label: movie.title,
+      }));
+    setOptions(filteredOptions);
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
+    setSearchQuery(""); // Clear search input after submission
+  };
+
   return (
     <nav className="w-full fixed z-40">
       <div
@@ -78,13 +167,31 @@ const Navbar: React.FC = () => {
           <NavbarItem label="Home" onClick={() => handleNavigation("/home")} />
           <NavbarItem
             label="Series"
-            onClick={() => handleNavigation("/home")}
+            onClick={() => handleNavigation("/series")}
           />
-          <NavbarItem label="Films" onClick={() => handleNavigation("/home")} />
+          <NavbarItem
+            label="Films"
+            onClick={() => handleNavigation("/films")}
+          />
           <NavbarItem
             label="My List"
             onClick={() => handleNavigation("/myList")}
           />
+          <div className="flex-1 ml-8">
+            <form onSubmit={handleSearchSubmit} className="flex items-center">
+              <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
+                <BsSearch />
+              </div>
+              <Select
+                value={options.find((option) => option.value === searchQuery)}
+                onInputChange={handleSearchInputChange}
+                onChange={handleSearchChange}
+                options={options}
+                placeholder="Search films..."
+                styles={customStyles}
+              />
+            </form>
+          </div>
         </div>
         <div
           onClick={toggleMobileMenu}
@@ -99,9 +206,6 @@ const Navbar: React.FC = () => {
           <MobileMenu visible={showMobileMenu} />
         </div>
         <div className="flex flex-row ml-auto gap-7 items-center">
-          <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
-            <BsSearch />
-          </div>
           <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
             <BsBell />
           </div>

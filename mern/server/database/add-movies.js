@@ -35,9 +35,9 @@ const movies = [
     title: "Sintel",
     description:
       "Sintel is a short computer-animated fantasy film by the Blender Institute.",
-    videoUrl: "https://archive.org/download/Sintel/sintel-2048-surround.mp4",
-    thumbnailUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/3/31/Sintel_poster.jpg",
+    videoUrl:
+      "https://dn790004.ca.archive.org/0/items/Sintel/sintel-2048-surround.mp4",
+    thumbnailUrl: "https://picfiles.alphacoders.com/124/124263.jpg",
     genre: "Fantasy",
     duration: "14:48",
   },
@@ -46,55 +46,23 @@ const movies = [
     description:
       "Tears of Steel is a short science fiction film by the Blender Institute.",
     videoUrl:
-      "https://archive.org/download/Tears_of_Steel/Tears_of_Steel_1080p.mp4",
+      "https://ia801705.us.archive.org/2/items/tearsofsteel_202010/TEARSOFSTEEL.mp4",
     thumbnailUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/3/3a/Tears_of_Steel_film_poster.jpg",
+      "https://m.media-amazon.com/images/M/MV5BNzNiMDUxYmItMzkyMS00MzlmLWJlNWYtYmUyMmFkZDE4MjExXkEyXkFqcGdeQXVyNjMxMTk1NTM@._V1_.jpg",
     genre: "Science Fiction",
     duration: "12:14",
   },
-  {
-    title: "Caminandes: Llama Drama",
-    description:
-      "Caminandes: Llama Drama is a short animated film by the Blender Institute.",
-    videoUrl:
-      "https://archive.org/download/CaminandesLlamaDrama/caminandes_llama_drama.mp4",
-    thumbnailUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/5/54/Caminandes_Llama_Drama.jpg",
-    genre: "Animation",
-    duration: "2:30",
-  },
-  {
-    title: "La Belle et la Bête",
-    description:
-      "La Belle et la Bête is a French romantic fantasy film directed by Jean Cocteau.",
-    videoUrl:
-      "https://archive.org/download/LaBelleEtLaBete_201303/LaBelleEtLaBete.mp4",
-    thumbnailUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/5/5f/La_Belle_et_La_Bete_1946.png",
-    genre: "Fantasy",
-    duration: "1:33:00",
-  },
+
   {
     title: "A Trip to the Moon",
     description:
       "A Trip to the Moon is a French silent film directed by Georges Méliès.",
     videoUrl:
-      "https://archive.org/download/A_Trip_To_The_Moon/A_Trip_To_The_Moon.mp4",
+      "https://ia801004.us.archive.org/9/items/youtube-vFY5HibBi4A/A_Trip_to_the_Moon_-_1902-vFY5HibBi4A.mp4",
     thumbnailUrl:
-      "https://upload.wikimedia.org/wikipedia/commons/9/9f/Le_Voyage_dans_la_lune.jpg",
+      "https://i.pinimg.com/originals/8b/6d/b3/8b6db336b98cf9a123823cd48c536dfd.jpg",
     genre: "Science Fiction",
     duration: "12:52",
-  },
-  {
-    title: "Naruto Ep. 3",
-    description:
-      "The Great Train Robbery is a short silent Western film directed by Edwin S. Porter.",
-    videoUrl:
-      "https://archive.org/download/great_train_robbery/great_train_robbery.mp4",
-    thumbnailUrl:
-      "https://archive.org/download/10-naruto/10-naruto.thumbs/10%20Naruto_000660.jpg",
-    genre: "Western",
-    duration: "12:00",
   },
 ];
 
