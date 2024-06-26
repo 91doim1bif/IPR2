@@ -1,4 +1,14 @@
-# Feauters
+# CI/CD
+
+![CI](https://github.com/91doim1bif/IPR2/workflows/CI/CD%20Pipeline/badge.svg)
+
+# Coverage
+
+[![codecov](https://codecov.io/gh/91doim1bif/IPR2/graph/badge.svg?token=EDD7EI62T4)](https://codecov.io/gh/91doim1bif/IPR2)
+
+# Overview
+
+## Feauters
 
 1. VerifyToken
 2. Login
@@ -23,9 +33,9 @@
 21. Mobile Ansicht
 
 
-# Movie List Anwendung
+## Movie List Anwendung
 
-## Übersicht
+### Übersicht
 
 Diese Anwendung ermöglicht es Benutzern, Filme anzuzeigen, hinzuzufügen, zu bearbeiten und zu löschen. Sie beinhaltet auch Funktionen zur Benutzerauthentifizierung, Profilverwaltung und zum Ansehen einzelner Filmdetails.
 
@@ -34,7 +44,7 @@ Diese Anwendung ermöglicht es Benutzern, Filme anzuzeigen, hinzuzufügen, zu be
 
 (Die Modelle können noch angepasst werden)
 
-### Account
+#### Account
 
 | Feld              | Typ                 | Beschreibung                                |
 | ----------------- | ------------------- | ------------------------------------------- |
@@ -51,7 +61,7 @@ Diese Anwendung ermöglicht es Benutzern, Filme anzuzeigen, hinzuzufügen, zu be
 | id_token          | String              | Token zur Identifizierung                   |
 | session_state     | String              | Zustand der Sitzung                         |
 
-### VerificationToken
+#### VerificationToken
 
 | Feld       | Typ    | Beschreibung                                |
 | ---------- | ------ | ------------------------------------------- |
@@ -60,7 +70,7 @@ Diese Anwendung ermöglicht es Benutzern, Filme anzuzeigen, hinzuzufügen, zu be
 | token      | String | Token zur Verifizierung                     |
 | expires    | Date   | Ablaufdatum des Tokens                      |
 
-### Movie
+#### Movie
 
 | Feld         | Typ    | Beschreibung                                  |
 | ------------ | ------ | --------------------------------------------- |
@@ -72,7 +82,7 @@ Diese Anwendung ermöglicht es Benutzern, Filme anzuzeigen, hinzuzufügen, zu be
 | genre        | String | Genre des Films                               |
 | duration     | String | Dauer des Films (z.B. '2 Stunden 30 Minuten') |
 
-### User
+#### User
 
 | Feld               | Typ                            | Beschreibung                        |
 | ------------------ | ------------------------------ | ----------------------------------- |
@@ -90,21 +100,21 @@ Diese Anwendung ermöglicht es Benutzern, Filme anzuzeigen, hinzuzufügen, zu be
 
 </details>
 
-## Anmeldung
+### Anmeldung
 
-### Admin
+#### Admin
 
 Email: admin@net-movies.de
 Passwort: admin
 
-### User
+#### User
 
 Email: user@net-movies.de
 Passwort: user
 
-## Verwendung
+### Verwendung
 
-### API-Routen
+#### API-Routen
 
 | Pfad                                             | Methode | Beschreibung                               |
 | ------------------------------------------------ | ------- | ------------------------------------------ |
@@ -121,15 +131,12 @@ Passwort: user
 | `/api/profiles`                                  | POST    | Neues Profil hinzufügen                    |
 | `/api/profiles/:profileId`                       | DELETE  | Profil löschen                             |
 
-## CI/CD Pipeline
-codecov
-cypress
 
-## Beispiel-Filme
+### Beispiel-Filme
 
 Die folgenden Filme wurden in die Datenbank hinzugefügt:
 
-#### Big Buck Bunny
+##### Big Buck Bunny
 
 - **Title**: Big Buck Bunny
 - **Description**: Big Buck Bunny is a short computer-animated comedy film by the Blender Institute.
@@ -139,7 +146,7 @@ Die folgenden Filme wurden in die Datenbank hinzugefügt:
 - **Duration**: 10:34
 - **ID**: 664a6a887d397d87582c27e0
 
-#### Sintel
+##### Sintel
 
 - **Title**: Sintel
 - **Description**: Sintel is a short computer-animated fantasy film by the Blender Institute.
@@ -149,7 +156,7 @@ Die folgenden Filme wurden in die Datenbank hinzugefügt:
 - **Duration**: 14:48
 - **ID**: 664a6a887d397d87582c27df
 
-#### Tears of Steel
+##### Tears of Steel
 
 - **Title**: Tears of Steel
 - **Description**: Tears of Steel is a short science fiction film by the Blender Institute.
@@ -159,7 +166,7 @@ Die folgenden Filme wurden in die Datenbank hinzugefügt:
 - **Duration**: 12:14
 - **ID**: 664c50d14f906d0ca1b2cf0a
 
-#### Elephants Dream
+##### Elephants Dream
 
 - **Title**: Elephants Dream
 - **Description**: Elephants Dream is a short computer-animated film by the Blender Institute.
