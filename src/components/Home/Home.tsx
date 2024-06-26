@@ -21,6 +21,7 @@ const Home: React.FC = () => {
   const [movieId, setMovieId] = useState<string | null>(null);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [profile, setProfile] = useState<any>();
+  const [uniqueGenres, setUniqueGenres] = useState<string[]>([]);
 
   const handleCloseModal = () => {
     setIsModalVisible(false);
@@ -52,6 +53,17 @@ const Home: React.FC = () => {
     }
   }, [fetchFavorites, histories.length]);
 
+  useEffect(() => {
+    // Sammle alle eindeutigen Genres aus den Filmen
+    const allGenres: string[] = [];
+    movies.forEach((movie) => {
+      if (movie.genre && !allGenres.includes(movie.genre)) {
+        allGenres.push(movie.genre);
+      }
+    });
+    setUniqueGenres(allGenres);
+  }, [movies]);
+
   if (moviesLoading || favoritesLoading || historiesLoading) {
     return (
       <div className="flex items-center justify-center h-screen bg-[#141414] text-white">
@@ -65,16 +77,17 @@ const Home: React.FC = () => {
       <Navbar />
       <Billboard onInfoClick={handleOpenModal} />
       {histories.length > 0 && profile && (
-        <div className="pb-40">
+        <div className="pb-30">
           <MovieList
-            title={`Mit dem Profil von ${profile.name} weiter anschauen`}
+            title={`Continue Watching with ${profile.name}'s Profile`}
             data={histories}
             onInfoClick={handleOpenModal}
             history={true}
           />
         </div>
       )}
-      <div className="pb-40">
+
+      <div className="pb-0">
         <MovieList
           title="Trending Now"
           data={movies}
@@ -82,6 +95,17 @@ const Home: React.FC = () => {
           history={false}
         />
       </div>
+      {uniqueGenres.map((genre, index) => (
+        <div key={index} className="pb-0">
+          <MovieList
+            title={genre}
+            data={movies.filter((movie) => movie.genre === genre)}
+            onInfoClick={handleOpenModal}
+            history={false}
+          />
+        </div>
+      ))}
+
       {isModalVisible && movieId && (
         <InfoModal
           visible={isModalVisible}
