@@ -1,55 +1,66 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 import MovieList from "../components/Home/MovieList";
 import { Movie } from "../types/movie";
 
-// Mock für die MovieCard-Komponente
-jest.mock("./MovieCard", () => ({
-  __esModule: true,
-  default: ({ data, onInfoClick }: { data: Movie, onInfoClick: (id: string) => void }) => (
-    <div data-testid="movie-card">
-      <button onClick={() => onInfoClick(data.id)}>Info</button>
-      <p>{data.title}</p>
+// Mock data for testing
+const mockMovies: Movie[] = [
+  {
+    id: "664a6a887d397d87582c27e0",
+    title: "Big Buck Bunny",
+    description: "Big Buck Bunny is a short computer-animated comedy film by the Blender Institute.",
+    videoUrl: "http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4",
+    thumbnailUrl: "https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217",
+    genre: "Animation",
+    duration: "10:34"
+  }
+];
+
+// Mock components
+jest.mock("../components/Home/MovieCard", () => ({ data, onInfoClick }: any) => (
+  <div data-testid="movie-card" onClick={() => onInfoClick(data.id)}>
+    {data.title}
+  </div>
+));
+
+jest.mock("../components/Home/InfoModal", () => ({ visible, onClose, movieId, setMovieId }: any) => (
+  visible ? (
+    <div data-testid="info-modal">
+      <button data-testid="close-modal" onClick={onClose}>Close</button>
+      <p>Movie ID: {movieId}</p>
     </div>
-  ),
-}));
+  ) : null
+));
 
-// Mock für die InfoModal-Komponente
-jest.mock("./InfoModal", () => ({
-  __esModule: true,
-  default: ({ visible, onClose, movieId }: { visible: boolean, onClose: () => void, movieId: string }) => (
-    visible ? <div data-testid="info-modal"><button onClick={onClose}>Close</button></div> : null
-  ),
-}));
-
-describe("MovieList", () => {
-  const mockMovies: Movie[] = [
-    { id: "1", title: "Movie 1", thumbnailUrl: "", videoUrl: "", description: "", genre: "", duration: "" },
-    { id: "2", title: "Movie 2", thumbnailUrl: "", videoUrl: "", description: "", genre: "", duration: "" },
-  ];
-
-  it("renders the movie list with title", () => {
-    render(<MovieList data={mockMovies} title="Test Title" />);
-
-    expect(screen.getByText("Test Title")).toBeInTheDocument();
-    expect(screen.getAllByTestId("movie-card")).toHaveLength(2);
+describe("MovieList Component", () => {
+  it("renders the title", () => {
+    render(<MovieList data={mockMovies} title="Test Movies" />);
+    expect(screen.getByText("Test Movies")).toBeInTheDocument();
   });
 
-  it("shows 'No movies found' when data is empty", () => {
-    render(<MovieList data={[]} title="Empty List" />);
-
-    expect(screen.getByText("Empty List")).toBeInTheDocument();
+  it("displays 'No movies found' when there is no data", () => {
+    render(<MovieList data={[]} title="Test Movies" />);
     expect(screen.getByText("No movies found")).toBeInTheDocument();
   });
 
-  it("opens and closes the InfoModal when movie info is clicked", () => {
-    render(<MovieList data={mockMovies} title="Test Title" />);
+  it("renders a list of movies", () => {
+    render(<MovieList data={mockMovies} title="Test Movies" />);
+    const movieCards = screen.getAllByTestId("movie-card");
+    expect(movieCards.length).toBe(1);
+    expect(movieCards[0]).toHaveTextContent("Big Buck Bunny");
+  });
 
-    fireEvent.click(screen.getAllByText("Info")[0]);
+  it("opens and closes the InfoModal when a movie is clicked", () => {
+    render(<MovieList data={mockMovies} title="Test Movies" />);
+
+    // Click on the movie card to open the modal
+    fireEvent.click(screen.getByText("Big Buck Bunny"));
     expect(screen.getByTestId("info-modal")).toBeInTheDocument();
+    expect(screen.getByText("Movie ID: 664a6a887d397d87582c27e0")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByText("Close"));
+    // Close the modal
+    fireEvent.click(screen.getByTestId("close-modal"));
     expect(screen.queryByTestId("info-modal")).not.toBeInTheDocument();
   });
 });

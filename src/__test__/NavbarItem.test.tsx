@@ -1,27 +1,40 @@
+// NavbarItem.test.tsx
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect'; // For using jest-dom matchers
-
+import { render, screen, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import NavbarItem from '../components/Navbar/NavbarItem';
 
 describe('NavbarItem Component', () => {
-  test('should render without crashing', () => {
-    const mockOnClick = jest.fn(); // Create a mock function for onClick
-    render(<NavbarItem label="Test Label" onClick={mockOnClick} />);
+  test('renders the label', () => {
+    const label = 'Home';
+    render(<NavbarItem label={label} onClick={() => {}} />);
+
+    // Check if the label is rendered
+    expect(screen.getByText(label)).toBeInTheDocument();
   });
 
-  test('should render correct label', () => {
-    const mockOnClick = jest.fn(); // Create a mock function for onClick
-    const { getByText } = render(<NavbarItem label="Test Label" onClick={mockOnClick} />);
-    expect(getByText('Test Label')).toBeInTheDocument();
+  test('calls onClick when clicked', () => {
+    const label = 'Home';
+    const onClickMock = jest.fn();
+    render(<NavbarItem label={label} onClick={onClickMock} />);
+
+    // Simulate a click event
+    fireEvent.click(screen.getByText(label));
+
+    // Check if onClick was called once
+    expect(onClickMock).toHaveBeenCalledTimes(1);
   });
 
-  test('should call onClick when clicked', () => {
-    const mockOnClick = jest.fn(); // Create a mock function for onClick
-    const { getByText } = render(<NavbarItem label="Test Label" onClick={mockOnClick} />);
-    
-    fireEvent.click(getByText('Test Label'));
-    
-    expect(mockOnClick).toHaveBeenCalledTimes(1); // Check if onClick is called once
+  test('applies correct styles on hover', () => {
+    const label = 'Home';
+    render(<NavbarItem label={label} onClick={() => {}} />);
+
+    const navbarItem = screen.getByText(label);
+
+    // Simulate hover state
+    fireEvent.mouseOver(navbarItem);
+
+    // Check if hover styles are applied
+    expect(navbarItem).toHaveClass('hover:text-gray-300');
   });
 });

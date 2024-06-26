@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="w-full fixed z-40">
+    <nav className="w-full fixed z-40" role="navigation">
       <div
         className={`px-4 md:px-16 py-6 flex flex-row items-center transition duration-500 ${
           showBackground ? "bg-zinc-900 bg-opacity-90" : ""
@@ -91,10 +91,16 @@ const Navbar: React.FC = () => {
           <MobileMenu visible={showMobileMenu} />
         </div>
         <div className="flex flex-row ml-auto gap-7 items-center">
-          <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
+          <div
+            className="text-gray-200 hover:text-gray-300 cursor-pointer transition"
+            data-testid="search-icon"
+          >
             <BsSearch />
           </div>
-          <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
+          <div
+            className="text-gray-200 hover:text-gray-300 cursor-pointer transition"
+            data-testid="notification-icon"
+          >
             <BsBell />
           </div>
           <div
