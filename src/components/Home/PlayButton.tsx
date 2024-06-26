@@ -60,7 +60,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({ movieId }) => {
         transition
       "
     >
-      <BsFillPlayFill size={25} className="mr-1" />
+      <BsFillPlayFill size={25} className="mr-1" data-testid="BsFillPlayFill" />
       Play
     </button>
   );

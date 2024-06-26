@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@next-auth/prisma-adapter": "^1.0.7",
     "@react-oauth/google": "^0.12.1",
     "autoprefixer": "^10.4.19",
     "axios": "^1.6.8",
@@ -18,7 +17,7 @@
     "react-google-login": "^5.2.2",
     "react-icons": "^5.2.1",
     "react-router-dom": "^6.23.1",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "^3.0.1",
     "swr": "^2.2.5",
     "tailwindcss": "^3.4.3",
     "ts-loader": "^9.5.1",
@@ -32,7 +31,8 @@
     "startFrontend": "react-scripts start",
     "startBackend": "nodemon mern/server/server.js",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage",
+    "test:ci": "react-scripts test --coverage --watchAll=false --detectOpenHandles",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -54,11 +54,20 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@babel/plugin-proposal-private-property-in-object": "^7.18.6",
+    "@testing-library/react": "^15.0.7",
+    "@testing-library/user-event": "^14.5.2",
     "@types/axios": "^0.14.0",
-    "@types/jest": "^29.5.12",
     "@types/lodash": "^4.17.1",
     "@types/mongodb": "^4.0.7",
     "@types/react-dom": "^18.3.0",
     "@types/testing-library__react": "^10.2.0"
+  },
+  "type": "module",
+  "jest": {
+    "moduleNameMapper": {
+      "^axios$": "axios/dist/node/axios.cjs"
+    }
   }
 }

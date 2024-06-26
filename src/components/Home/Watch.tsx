@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import useMovie from "../../hooks/useMovie"; // Passe den Pfad an deine Projektstruktur an
-import { AiOutlineArrowLeft } from "react-icons/ai"; // Icon für den Zurück-Button
+import useMovie from "../../hooks/useMovie";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const Watch: React.FC = () => {
   const { movieId } = useParams<{ movieId: string }>();
@@ -16,7 +16,6 @@ const Watch: React.FC = () => {
     return <div>Error loading movie</div>;
   }
 
-  // Funktion zum Extrahieren der YouTube-Video-ID aus einer URL
   const isYouTube = (url: string) => {
     const isYoutubeLink = url.includes("youtube") || url.includes("youtu");
     return isYoutubeLink;
@@ -48,6 +47,7 @@ const Watch: React.FC = () => {
           autoPlay
           controls
           src={movie.videoUrl}
+          data-testid="video-element"
         ></video>
       )}
     </div>
