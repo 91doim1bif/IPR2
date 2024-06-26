@@ -11,8 +11,7 @@ app.use(express.json());
 
 const PORT = 3080;
 
-const uri =
-  "mongodb+srv://mikailaktuerk99:fU01ACNxVMCzuiP6@customer.p3usn7i.mongodb.net/?retryWrites=true&w=majority&appName=Customer";
+const uri = "mongodb://localhost:27017/test";
 const dbName = "sample_mflix";
 var database;
 var client = new MongoClient(uri);

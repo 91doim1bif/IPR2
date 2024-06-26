@@ -12,8 +12,7 @@ const cookieSession = require("cookie-session");
 const app = express();
 
 // Set environment variables directly in the code
-const MONGODB_URI =
-  "mongodb+srv://mikailaktuerk99:fU01ACNxVMCzuiP6@customer.p3usn7i.mongodb.net/?retryWrites=true&w=majority&appName=Customer";
+const MONGODB_URI = "mongodb://localhost:27017/test";
 const JWT_SECRET = "JWT-SECRET";
 const GOOGLE_CLIENT_ID =
   "110894858120-a6j1a5asvt2ubb1gk558a17ts0fp9mpn.apps.googleusercontent.com";
@@ -42,9 +41,9 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
+  // User.findById(id, (err, user) => {
+  //   done(err, id);
+  // });
 });
 
 // Google OAuth Strategy
@@ -130,9 +129,12 @@ app.get(
   }
 );
 
-app.get("/auth/github", passport.authenticate("github"), {
-  scope: ["user:email"],
-});
+app.get(
+  "/auth/github",
+  passport.authenticate("github", {
+    scope: ["user:email"],
+  })
+);
 
 app.get(
   "/auth/github/callback",

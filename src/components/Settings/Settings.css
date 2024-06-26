@@ -1,11 +1,15 @@
+/* Settings.css */
+
+/* Entire settings page layout */
 .settings-page {
-  background-color: black;
+  background-color: #141414;
   color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: row;
 }
 
+/* Sidebar styles */
 .sidebar {
   width: 200px;
   background-color: #333;
@@ -13,24 +17,59 @@
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
+  position: relative;
 }
 
-.sidebar button {
-  background-color: red;
+/* Back button styles */
+.sidebar .back-button {
+  position: left;
+  top: 20px; /* Adjust top position to create space */
+  left: 10px;
+  background-color: transparent;
   color: white;
-  border: none;
+  border: 2px solid white;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  margin-bottom: 10px;
+  transition: background-color 0.3s, border-color 0.3s;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
   width: 100%;
 }
 
-.sidebar button:hover {
-  background-color: darkred;
+.sidebar .back-button:hover {
+  background-color: blue;
+  border-color: blue;
 }
 
+/* Arrow icon styles (SVG icon example) */
+.sidebar .back-icon {
+  margin-right: 10px;
+  width: 20px; /* Adjust icon size as needed */
+}
+
+/* Other button styles */
+.sidebar .button {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+  width: 100%;
+  border-radius: 4px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.sidebar .button:hover {
+  background-color: blue;
+  border-color: blue;
+}
+
+/* Content area styles */
 .content {
   flex-grow: 1;
   display: flex;
@@ -39,6 +78,7 @@
   justify-content: center;
 }
 
+/* Form group styles */
 .form-group {
   margin-bottom: 20px;
 }
@@ -46,9 +86,30 @@
 .form-group input {
   padding: 10px;
   font-size: 16px;
+  color: black;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   margin-right: 10px;
 }
 
 .form-group label {
   margin-right: 10px;
+}
+
+/* Generic button styles */
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  border-radius: 4px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.button:hover {
+  background-color: blue;
+  border-color: blue;
 }

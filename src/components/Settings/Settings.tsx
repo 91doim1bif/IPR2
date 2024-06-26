@@ -28,34 +28,60 @@ const Settings: React.FC = () => {
   const [selectedAction, setSelectedAction] = useState("changeEmail");
   const [currentEmail, setCurrentEmail] = useState("");
   const [newEmail, setNewEmail] = useState("");
+  const [newUserName, setNewUserName] = useState("");
+  const [currentUserName, setCurrentUserName] = useState("");
+
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCurrentEmail = async () => {
       try {
         const response = await axiosInstance.get("/api/user/email");
-
         setCurrentEmail(response.data.email);
       } catch (error) {
         console.error("Error fetching current email", error);
       }
     };
+
+    const fetchCurrentUsername = async () => {
+      try {
+        const response = await axiosInstance.get("/api/user/name");
+        setCurrentUserName(response.data.user_name);
+      } catch (error) {
+        console.error("Error fetching current user name", error);
+      }
+    };
+
     fetchCurrentEmail();
+    fetchCurrentUsername();
   }, []);
 
   const handleDeleteAccount = async () => {
-    // const userConfirmed = window.confirm(
-    //   "Are you sure you want to delete your account? This action cannot be undone."
-    // );
-    // if (!userConfirmed) return;
-    // try {
-    //   const response = await axiosInstance.delete("/api/user");
-    //   alert("Your account has been deleted successfully.");
-    //   navigate("/auth");
-    // } catch (error) {
-    //   console.error("Error deleting account", error);
-    //   alert("There was a problem deleting your account. Please try again.");
-    // }
+    const userConfirmed = window.confirm(
+      "Are you sure you want to delete your account? This action cannot be undone."
+    );
+    if (!userConfirmed) return;
+
+    try {
+      const response = await axiosInstance.delete("/api/user");
+      alert("Your account has been deleted successfully.");
+      navigate("/auth");
+    } catch (error) {
+      console.error("Error deleting account", error);
+      alert("There was a problem deleting your account. Please try again.");
+    }
+  };
+
+  const handleChangeUserName = async () => {
+    try {
+      const response = await axiosInstance.put("/api/user/name", {
+        newUserName,
+      });
+      setCurrentUserName(response.data.user_name);
+      setNewUserName("");
+    } catch (error) {
+      console.error("Error changing user name", error);
+    }
   };
 
   const handleChangeEmail = async () => {
@@ -63,9 +89,8 @@ const Settings: React.FC = () => {
       const response = await axiosInstance.put("/api/user/email", {
         newEmail,
       });
-      const updatedEmail = response.data.email;
+      setCurrentEmail(response.data.email);
       setNewEmail("");
-      setCurrentEmail(updatedEmail);
     } catch (error) {
       console.error("Error changing email", error);
       alert("There was a problem changing your email. Please try again.");
@@ -88,6 +113,7 @@ const Settings: React.FC = () => {
             <input
               type="email"
               id="new-email"
+              className="input-field"
               value={newEmail}
               onChange={(e) => setNewEmail(e.target.value)}
             />
@@ -96,14 +122,25 @@ const Settings: React.FC = () => {
             </button>
           </div>
         );
-      case "changeImage":
+
+      case "changeUsername":
         return (
           <div className="form-group">
-            <label htmlFor="new-image">New Image:</label>
-            <input type="file" id="new-image" />
-            <button className="button">Change Image</button>
+            <p>Current User Name: {currentUserName}</p>
+            <label htmlFor="new-username">New User Name</label>
+            <input
+              type="text"
+              id="new-username"
+              className="input-field"
+              value={newUserName}
+              onChange={(e) => setNewUserName(e.target.value)}
+            />
+            <button className="button" onClick={handleChangeUserName}>
+              Change User Name
+            </button>
           </div>
         );
+
       default:
         return null;
     }
@@ -112,13 +149,34 @@ const Settings: React.FC = () => {
   return (
     <div className="settings-page">
       <div className="sidebar">
-        <button onClick={() => setSelectedAction("changeEmail")}>
+        <button className="back-button" onClick={() => navigate(-1)}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="white"
+            className="back-icon"
+          >
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+          </svg>
+          Back
+        </button>
+        <button
+          className="button"
+          onClick={() => setSelectedAction("changeEmail")}
+        >
           Change Email
         </button>
-        <button onClick={() => setSelectedAction("changeImage")}>
-          Change Image
+        <button
+          className="button"
+          onClick={() => setSelectedAction("changeUsername")}
+        >
+          Change Username
         </button>
-        <button onClick={() => setSelectedAction("deleteAccount")}>
+
+        <button
+          className="button"
+          onClick={() => setSelectedAction("deleteAccount")}
+        >
           Delete Account
         </button>
       </div>

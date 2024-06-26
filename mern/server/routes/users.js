@@ -115,7 +115,6 @@ router.delete("/user", verifyToken, async (req, res) => {
 router.get("/user/email", verifyToken, async (req, res) => {
   try {
     const user = await User.findById(req.userId).select("email");
-    console.log(user);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -147,6 +146,37 @@ router.put("/user/email", verifyToken, async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send("Error updating user email");
+  }
+});
+
+router.get("/user/name", verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).select("name");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({ user_name: user.name });
+  } catch (err) {}
+});
+
+router.put("/user/name", verifyToken, async (req, res) => {
+  const { newUserName } = req.body;
+  if (!newUserName) {
+    return res.status(400).json({ message: "New user name is required" });
+  }
+  try {
+    const user = await User.findById(req.userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    } else {
+      user.name = newUserName;
+      user.save();
+      res.status(200).json({ user_name: user.name });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error updating user name");
   }
 });
 

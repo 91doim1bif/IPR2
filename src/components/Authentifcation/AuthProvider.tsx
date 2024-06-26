@@ -83,7 +83,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     if (token) {
       // Store the token in local storage
       localStorage.setItem("token", token);
-      setLoading(false);
+      setLoading(true);
       navigate("/profiles");
     }
 
