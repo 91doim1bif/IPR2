@@ -1,3 +1,4 @@
+// Watch.test.tsx
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
@@ -44,7 +45,7 @@ describe('Watch Component', () => {
     mockedUseMovie.mockReturnValue({
       data: null,
       isLoading: false,
-      error: new Error('Error loading movie'),
+      error: 'Error loading movie',
     });
 
     renderComponent('664a6a887d397d87582c27e0');
@@ -55,13 +56,13 @@ describe('Watch Component', () => {
   it('should display the video if the data is successfully fetched and the URL is not YouTube', async () => {
     mockedUseMovie.mockReturnValue({
       data: {
+        _id: '664a6a887d397d87582c27e0',
         title: 'Big Buck Bunny',
         description: 'Big Buck Bunny is a short computer-animated comedy film by the Blender Institute.',
         videoUrl: 'http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4',
         thumbnailUrl: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217',
         genre: 'Animation',
         duration: '10:34',
-        id: '664a6a887d397d87582c27e0',
       },
       isLoading: false,
       error: null,
@@ -78,13 +79,13 @@ describe('Watch Component', () => {
   it('should display the YouTube video if the URL is a YouTube link', async () => {
     mockedUseMovie.mockReturnValue({
       data: {
+        _id: '664a6a887d397d87582c27e0',
         title: 'Big Buck Bunny',
         description: 'Big Buck Bunny is a short computer-animated comedy film by the Blender Institute.',
         videoUrl: 'https://www.youtube.com/watch?v=aqz-KE-bpKQ',
         thumbnailUrl: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217',
         genre: 'Animation',
         duration: '10:34',
-        id: '664a6a887d397d87582c27e0',
       },
       isLoading: false,
       error: null,
@@ -101,13 +102,13 @@ describe('Watch Component', () => {
   it('should navigate back when the back button is clicked', async () => {
     mockedUseMovie.mockReturnValue({
       data: {
+        _id: '664a6a887d397d87582c27e0',
         title: 'Big Buck Bunny',
         description: 'Big Buck Bunny is a short computer-animated comedy film by the Blender Institute.',
         videoUrl: 'http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4',
         thumbnailUrl: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217',
         genre: 'Animation',
         duration: '10:34',
-        id: '664a6a887d397d87582c27e0',
       },
       isLoading: false,
       error: null,

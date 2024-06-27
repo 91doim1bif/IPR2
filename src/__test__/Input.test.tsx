@@ -24,7 +24,10 @@ describe("Input component", () => {
   });
 
   it("renders the label element correctly", () => {
-    const labelElement = screen.getByPlaceholderText(defaultProps.label).closest('div').querySelector('label');
+    const inputElement = screen.getByPlaceholderText(defaultProps.label);
+    const inputWrapper = inputElement.closest('div');
+    expect(inputWrapper).not.toBeNull();
+    const labelElement = inputWrapper?.querySelector('label');
     expect(labelElement).toBeInTheDocument();
     expect(labelElement).toHaveAttribute('for', defaultProps.id);
     expect(labelElement).toHaveClass("absolute text-md text-zinc-400 duration-150 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3");
@@ -52,7 +55,9 @@ describe("Input component", () => {
   it("applies correct classes on focus", () => {
     const inputElement = screen.getByPlaceholderText(defaultProps.label);
     fireEvent.focus(inputElement);
-    const labelElement = inputElement.closest('div').querySelector('label');
+    const inputWrapper = inputElement.closest('div');
+    expect(inputWrapper).not.toBeNull();
+    const labelElement = inputWrapper?.querySelector('label');
     expect(labelElement).toHaveClass("peer-focus:-translate-y-3");
   });
 });

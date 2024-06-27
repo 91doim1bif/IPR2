@@ -7,16 +7,21 @@ import { useAuth } from '../components/Authentifcation/AuthProvider';
 
 // Mock the useAuth hook
 jest.mock('../components/Authentifcation/AuthProvider', () => ({
-  useAuth: () => ({
-    login: jest.fn(),
-    register: jest.fn(),
-  }),
+  useAuth: jest.fn(),
 }));
 
-describe('Auth Component', () => {
-  const mockLogin = useAuth().login as jest.Mock;
-  const mockRegister = useAuth().register as jest.Mock;
+const mockLogin = jest.fn();
+const mockRegister = jest.fn();
+const mockGithubLogin = jest.fn();
 
+(useAuth as jest.Mock).mockReturnValue({
+  login: mockLogin,
+  register: mockRegister,
+  githubLogin: mockGithubLogin,
+  error: null,
+});
+
+describe('Auth Component', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     console.log = jest.fn(); // Mock console.log

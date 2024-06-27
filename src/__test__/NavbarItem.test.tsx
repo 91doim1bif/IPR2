@@ -1,40 +1,27 @@
-// NavbarItem.test.tsx
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import NavbarItem from '../components/Navbar/NavbarItem';
+import NavbarItem from '../components/Navbar/NavbarItem'; // Adjust the path according to your project structure
 
 describe('NavbarItem Component', () => {
-  test('renders the label', () => {
-    const label = 'Home';
-    render(<NavbarItem label={label} onClick={() => {}} />);
+  const mockOnClick = jest.fn();
+  const label = 'Home';
 
-    // Check if the label is rendered
+  beforeEach(() => {
+    render(<NavbarItem label={label} onClick={mockOnClick} />);
+  });
+
+  it('renders with the correct label', () => {
     expect(screen.getByText(label)).toBeInTheDocument();
   });
 
-  test('calls onClick when clicked', () => {
-    const label = 'Home';
-    const onClickMock = jest.fn();
-    render(<NavbarItem label={label} onClick={onClickMock} />);
-
-    // Simulate a click event
+  it('calls onClick when clicked', () => {
     fireEvent.click(screen.getByText(label));
-
-    // Check if onClick was called once
-    expect(onClickMock).toHaveBeenCalledTimes(1);
+    expect(mockOnClick).toHaveBeenCalledTimes(1);
   });
 
-  test('applies correct styles on hover', () => {
-    const label = 'Home';
-    render(<NavbarItem label={label} onClick={() => {}} />);
-
+  it('has the correct classes', () => {
     const navbarItem = screen.getByText(label);
-
-    // Simulate hover state
-    fireEvent.mouseOver(navbarItem);
-
-    // Check if hover styles are applied
-    expect(navbarItem).toHaveClass('hover:text-gray-300');
+    expect(navbarItem).toHaveClass('text-white cursor-pointer hover:text-gray-300 transition');
   });
 });

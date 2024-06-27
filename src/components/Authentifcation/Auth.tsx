@@ -1,3 +1,4 @@
+// Auth.tsx
 import React, { useState, useCallback, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "./Input"; // Ensure this is the correct path to your Input component
@@ -70,19 +71,22 @@ const Auth: React.FC = () => {
 
     try {
       if (variant === "login") {
-        authState.credentials_error = credentials_error;
         await login(email, password);
       } else {
         await register(name, email, password);
       }
-      //navigate("/profile");
+      // navigate("/profile");
     } catch (error) {
+      setAuthState((prev) => ({
+        ...prev,
+        credentials_error: credentials_error || "An error occurred",
+      }));
       console.error(
         `${variant === "login" ? "Login" : "Registration"} failed:`,
         error
       );
     }
-  }, [authState, login, register, navigate]);
+  }, [authState, login, register, credentials_error]);
 
   return (
     <div
@@ -142,9 +146,7 @@ const Auth: React.FC = () => {
                 value={authState.password}
               />
               <p style={{ color: "red" }} className=" rounded-md w-full mt-0">
-                {authState.variant === "login"
-                  ? authState.credentials_error
-                  : null}
+                {authState.credentials_error}
               </p>
               <button
                 onClick={handleAuthAction}
