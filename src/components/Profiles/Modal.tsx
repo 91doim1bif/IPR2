@@ -9,9 +9,22 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
+  const handleContentClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
-      <div className="bg-[#141414] rounded-lg overflow-hidden shadow-xl w-11/12 max-w-md">
+    <div
+      className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50"
+      data-testid="modal-overlay"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        className="bg-[#141414] rounded-lg overflow-hidden shadow-xl w-11/12 max-w-md"
+        onClick={handleContentClick}
+      >
         <div className="px-6 py-4">{children}</div>
         <div className="px-6 py-4 flex justify-end">
           <button
@@ -27,3 +40,4 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 };
 
 export default Modal;
+//test

@@ -1,3 +1,4 @@
+// Auth.tsx
 import React, { useState, useCallback, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "./Input"; // Ensure this is the correct path to your Input component
@@ -70,19 +71,22 @@ const Auth: React.FC = () => {
 
     try {
       if (variant === "login") {
-        authState.credentials_error = credentials_error;
         await login(email, password);
       } else {
         await register(name, email, password);
       }
-      //navigate("/profile");
+      // navigate("/profile");
     } catch (error) {
+      setAuthState((prev) => ({
+        ...prev,
+        credentials_error: credentials_error || "An error occurred",
+      }));
       console.error(
         `${variant === "login" ? "Login" : "Registration"} failed:`,
         error
       );
     }
-  }, [authState, login, register, navigate]);
+  }, [authState, login, register, credentials_error]);
 
   return (
     <div
@@ -100,13 +104,27 @@ const Auth: React.FC = () => {
             </h1>
             <div className="flex flex-col gap-4">
               {authState.variant === "register" && (
-                <Input
-                  label="Username"
-                  onChange={(e) => handleInputChange(e, "name")}
-                  id="name"
-                  value={authState.name}
-                />
+                <>
+                  <label
+                    className="absolute text-md text-zinc-400 duration-150 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3"
+                    htmlFor="name"
+                  >
+                    Username
+                  </label>
+                  <Input
+                    label="Username"
+                    onChange={(e) => handleInputChange(e, "name")}
+                    id="name"
+                    value={authState.name}
+                  />
+                </>
               )}
+              <label
+                className="absolute text-md text-zinc-400 duration-150 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3"
+                htmlFor="email"
+              >
+                Email
+              </label>
               <Input
                 label="Email"
                 onChange={(e) => handleInputChange(e, "email")}
@@ -114,6 +132,12 @@ const Auth: React.FC = () => {
                 type="email"
                 value={authState.email}
               />
+              <label
+                className="absolute text-md text-zinc-400 duration-150 transform -translate-y-3 scale-75 top-4 z-10 origin-[0] left-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-3"
+                htmlFor="password"
+              >
+                Password
+              </label>
               <Input
                 label="Password"
                 onChange={(e) => handleInputChange(e, "password")}
@@ -122,9 +146,7 @@ const Auth: React.FC = () => {
                 value={authState.password}
               />
               <p style={{ color: "red" }} className=" rounded-md w-full mt-0">
-                {authState.variant === "login"
-                  ? authState.credentials_error
-                  : null}
+                {authState.credentials_error}
               </p>
               <button
                 onClick={handleAuthAction}
@@ -136,10 +158,15 @@ const Auth: React.FC = () => {
                 <button
                   onClick={() => console.log("Login with Google")}
                   className="icon-button"
+                  aria-label="Login with Google"
                 >
                   <FcGoogle size={30} />
                 </button>
-                <button onClick={handleGithubLogin} className="icon-button">
+                <button
+                  onClick={handleGithubLogin}
+                  className="icon-button"
+                  aria-label="Login with GitHub"
+                >
                   <FaGithub size={30} color="white" />
                 </button>
               </div>
