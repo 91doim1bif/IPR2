@@ -62,16 +62,17 @@ const MovieCard: React.FC<MovieCardProps> = ({
   };
 
   return (
-    <div
-      className={`group bg-zinc-900 col-span relative ${
-        isHovered ? "h-[16vw]" : "h-[12vw]"
-      } ${isHovered ? "z-50" : "z-10"}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div className="relative col-span">
       <div
-        className={`
-          relative
+        className={`group bg-zinc-900 relative transition-all duration-500 ${
+          isHovered ? "h-[16vw] z-50" : "h-[12vw] z-10"
+        } top-0 left-0 w-full`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <div
+          className={`
+          absolute
           w-full
           h-full
           overflow-hidden
@@ -79,9 +80,9 @@ const MovieCard: React.FC<MovieCardProps> = ({
           duration-500
           ${isHovered ? "scale-125" : "scale-100"}
         `}
-      >
-        <img
-          className={`
+        >
+          <img
+            className={`
             cursor-pointer
             object-cover
             transition-opacity
@@ -91,15 +92,14 @@ const MovieCard: React.FC<MovieCardProps> = ({
             w-full
             h-[12vw]
           `}
-          src={data.thumbnailUrl}
-          alt="Thumbnail"
-        />
-        {isHovered && (
-          <video
-            className={`
+            src={data.thumbnailUrl}
+            alt="Thumbnail"
+          />
+          {isHovered && (
+            <video
+              className={`
             cursor-pointer
             object-cover
-            transition-opacity
             duration-500
             shadow-xl
             rounded-md
@@ -111,14 +111,14 @@ const MovieCard: React.FC<MovieCardProps> = ({
             opacity-100
             ${isHovered ? "opacity-100" : "opacity-0"}
           `}
-            src={data.videoUrl}
-            autoPlay
-            muted
-            loop
-          />
-        )}
-        <div
-          className={`
+              src={data.videoUrl}
+              autoPlay
+              muted
+              loop
+            />
+          )}
+          <div
+            className={`
             absolute
             bottom-0
             w-full
@@ -127,11 +127,11 @@ const MovieCard: React.FC<MovieCardProps> = ({
             duration-300
             ${isHovered ? "opacity-100 h-[5vw]" : "opacity-0 h-0"}
           `}
-        >
-          <div className="p-4">
-            <div className="flex items-center gap-3 mb-2">
-              <div
-                className="
+          >
+            <div className="p-4">
+              <div className="flex items-center gap-3 mb-2">
+                <div
+                  className="
                   bg-white
                   rounded-full
                   h-10
@@ -142,14 +142,14 @@ const MovieCard: React.FC<MovieCardProps> = ({
                   transition
                   hover:bg-neutral-300
                 "
-                onClick={() => addHistory(data._id)}
-              >
-                <BsFillPlayFill size={30} />
-              </div>
-              <FavoriteButton movieId={data._id} />
-              {history && (
-                <div
-                  className="
+                  onClick={() => addHistory(data._id)}
+                >
+                  <BsFillPlayFill size={30} />
+                </div>
+                <FavoriteButton movieId={data._id} />
+                {history && (
+                  <div
+                    className="
                     bg-white
                     rounded-full
                     h-10
@@ -160,14 +160,14 @@ const MovieCard: React.FC<MovieCardProps> = ({
                     transition
                     hover:bg-neutral-300
                   "
-                  onClick={() => del(data._id)}
-                >
-                  <BiX size={30} />
-                </div>
-              )}
-              <div
-                onClick={() => onInfoClick(data._id)}
-                className="
+                    onClick={() => del(data._id)}
+                  >
+                    <BiX size={30} />
+                  </div>
+                )}
+                <div
+                  onClick={() => onInfoClick(data._id)}
+                  className="
                   ml-auto
                   group/item
                   w-6
@@ -183,21 +183,24 @@ const MovieCard: React.FC<MovieCardProps> = ({
                   transition
                   hover:border-neutral-300
                 "
-              >
-                <BiChevronDown
-                  size={30}
-                  className="text-white group-hover/item:text-neutral-300"
-                />
+                >
+                  <BiChevronDown
+                    size={30}
+                    className="text-white group-hover/item:text-neutral-300"
+                  />
+                </div>
               </div>
-            </div>
-            <p className="text-green-400 font-semibold">
-              New <span className="text-white">2023</span>
-            </p>
-            <div className="flex flex-row gap-2 items-center mt-2">
-              <p className="text-white text-[10px] lg:text-sm">
-                {data.duration}
+              <p className="text-green-400 font-semibold">
+                New <span className="text-white">2023</span>
               </p>
-              <p className="text-white text-[10px] lg:text-sm">{data.genre}</p>
+              <div className="flex flex-row gap-2 items-center mt-2">
+                <p className="text-white text-[10px] lg:text-sm">
+                  {data.duration}
+                </p>
+                <p className="text-white text-[10px] lg:text-sm">
+                  {data.genre}
+                </p>
+              </div>
             </div>
           </div>
         </div>
