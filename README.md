@@ -10,29 +10,28 @@
 
 ## Feauters
 
-1. VerifyToken
-2. Login
-3. Register
-4. Profile anzeigen
-5. Profile entfernen
-6. Profile ändern
-7. Profilbild ändern
-8. Billboard
-9. Videos anzeigen
-10. Videos abspielen
-11. Videos favorisieren
-12. Video Wiedergabe mit zurück Button
-13. Suche
-14. Watchlist ("My List")
-15. Aus Watchlist Videos entfernen
-16. Verlauf
-17. Videos aus Verlauf löschen
-18. Navigation Bar
-19. Account bearbeiten
-20. Account entfernen
-21. Mobile Ansicht
-22. Bilboard: Kategorien 
-
+1. VerifyToken - Als User, möchte ich dass im Hintergrund mein Profil gesichert wird über einen VerifyToken, damit mein Profil geschützt bleibt.
+2. Login - Als User möchte, ich mich in meinem Account anmelden, damit ich auf meine Profile Zugriff bekomme.
+3. Register - Als Interessent, möchte ich einen Account erstellen, damit ich Zugriff auf den Service erhalten kann.
+4. Profile anzeigen - Als User, möchte ich meine Profile anzeigen, damit ich zwischen Profilen wechseln kann.
+5. Profile entfernen - Als User, möchte ich Profile entfernen können, damit ich meine Profilanzahl organisieren kann.
+6. Profile ändern - Als User, möchte ich meine Profile ändern, damit ich meine Profilübersicht organisieren kann kann.
+7. Profilbild ändern - Als User, möchte ich mein Profilbild ändern können, damit ich mein Profil personalisieren kann.
+8. Billboard - Als User, möchte ich nach im Hauptbildschirm eine Übersicht von allem haben, damit ich leicht durch alles navigieren kann.
+9. Bilboardkategorien - Als User, möchte ich dass auf dem Billboard die Medien unterkategorisiert werden, damit ich eine leichter Übersicht über die verschiedenen Genres habe.
+10. Videos anzeigen - Als User, möchte ich dass Filme/Serien größer werden wenn ich mit der Maus über sie hover, damit ich mehr Informationen bekomme bevor ich ein Film/ eine Serie öffne.
+11. Videos abspielen - Als User, möchte ich Filme/Serien abspielen können, damit ich das gewählte Medium anschauen kann.
+12. Videos favorisieren - Als User, möchte ich Filme/Serien favorisieren, damit ich an einem späteren Zeitpunkt leichter Zugriff auf meine Lieblingsserien habe.
+13. Video Wiedergabe mit zurück Button - Als User, möchte ich wissen welche Medien ich als letztes geschaut habe, damit ich weiß wo ich weiterschauen kann.
+14. Suche - Als User, möchte ich nach Medien direkt suchen können, damit ich schnell Zugriff darauf bekomme.
+15. Watchlist ("My List") - Als User, möchte ich auf meine favorisierten Medien in einer Liste Zugriff haben, damit ich eine Übersicht über meine Lieblingsserien habe.
+16. Aus Watchlist Videos entfernen - Als User, möchte ich Medien aus meiner Wachlist entfernen, damit ich meine Meinung über Medien ändern kann.
+17. Verlauf - Als User, möchte ich wissen welche Medien ich als letztes geschaut habe, damit ich weiß wo ich weiterschauen kann.
+18. Videos aus Verlauf löschen - Als User, möchte ich Medien aus meinem Verlauf löschen, damit ich Teile meines Verlaufs privat halten kann.
+19. Navigation Bar - Als User, möchte ich oben eine Übersicht haben, damit ich sehr leicht über die Hauptfunktionen navigieren kann.
+20. Account bearbeiten - Als User, möchte ich meine Accountdaten bearbeiten, damit ich weiterhin Zugriff darauf haben kann falls sich Sachen bei mir ändern.
+21. Account entfernen - Als User, möchte ich meinen Account löschen, damit mein Account nicht mehr bei Notflix ist falls ich den Service nicht mehr nutzen will.
+22. Mobile Ansicht - Als User, möchte ich dass die App sich anpasst für Smartphones, damit die Navigation damit sich besser anfühlt.
 
 ## Movie List Anwendung
 
@@ -131,7 +130,6 @@ Passwort: user
 | `/api/profiles`                                  | GET     | Alle Profile eines Benutzers abrufen       |
 | `/api/profiles`                                  | POST    | Neues Profil hinzufügen                    |
 | `/api/profiles/:profileId`                       | DELETE  | Profil löschen                             |
-
 
 ### Beispiel-Filme
 

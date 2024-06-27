@@ -154,22 +154,6 @@ const Auth: React.FC = () => {
               >
                 {authState.variant === "login" ? "Login" : "Sign up"}
               </button>
-              <div className="flex flex-row items-center gap-4 mt-8 justify-center">
-                <button
-                  onClick={() => console.log("Login with Google")}
-                  className="icon-button"
-                  aria-label="Login with Google"
-                >
-                  <FcGoogle size={30} />
-                </button>
-                <button
-                  onClick={handleGithubLogin}
-                  className="icon-button"
-                  aria-label="Login with GitHub"
-                >
-                  <FaGithub size={30} color="white" />
-                </button>
-              </div>
               <p className="text-neutral-500 mt-12">
                 {authState.variant === "login"
                   ? "First time using our service?"
