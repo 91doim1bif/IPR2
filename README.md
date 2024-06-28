@@ -30,7 +30,7 @@
 18. Navigation Bar
 19. Account bearbeiten
 20. Account entfernen
-21. Mobile Ansicht
+21. Info Modal "Mehr Infos"
 
 
 ## Movie List Anwendung
